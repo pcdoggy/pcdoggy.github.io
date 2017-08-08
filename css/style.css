@@ -2,4 +2,5 @@ body {
 	background: url(../img/bg.jpg) no-repeat;
 	background-size: 100%;
 	background-repeat: repeat-y;
+	min-width: 1000px;
 }

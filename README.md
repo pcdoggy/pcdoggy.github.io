@@ -12,7 +12,7 @@ Over the past 3 years,it's too lazy for me to do anything about my used work.
 From today,I will take notes from time to time, prove that I've got some skills and make sure remember all details.
 
 
-# Copyright：pcdggy  Last Modify：geyandan	2017.08.02
+# Copyright：pcdggy  Last Modify：geyandan	2017.08.08
 ===================================================================
 
 css/ 网站内部样式需求
@@ -20,6 +20,8 @@ css/ 网站内部样式需求
 img/ 网站内部图片需求
 
 js/ 网站内部脚本需求
+
+json/ 网站内部数据需求
 
 dist/ 框架引用文件  此处使用bootstrap
 

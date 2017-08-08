@@ -1079,6 +1079,12 @@ th {
 .glyphicon-qq:before{
 	content: "\f1d6";
 }
+.glyphicon-angle-double-left:before{
+	content: "\f100";
+}
+.glyphicon-angle-double-right:before{
+	content: "\f101";
+}
 * {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;

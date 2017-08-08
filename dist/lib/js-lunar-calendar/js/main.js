@@ -91,7 +91,7 @@ var dStyle;
 
 
 // 时钟clock
-setInterval("oTime()",1000);
+//setInterval("oTime()",1000);
 function oTime() {
    today = new Date();
    var hou = today.getHours();
