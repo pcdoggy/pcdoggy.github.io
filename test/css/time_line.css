@@ -1,18 +1,21 @@
 .time_line {
-	/*时间轴模块*/
+	/*时间轴模块 v1.0*/
 }
+.time_line.time_v1{
+	display: none;
+	}
 
-.time_list {
+.time_v1 .time_list {
 	list-style: none;
 }
 
-.time_items {
+.time_v1 .time_items {
 	/*时间轴各时间段*/
 	float: left;
 	text-align: center;
 }
 
-.time_items .time_icon {
+.time_v1 .time_items .time_icon {
 	/*时间轴各时间段图标*/
 	list-style: none;
 	height: 2em;
@@ -21,7 +24,7 @@
 	border-bottom: 3px solid #777;
 	position: relative;
 }
-.time_items .time_icon .time_icon_arrow{
+.time_v1 .time_items .time_icon .time_icon_arrow{
 	/*时间轴各时间段图标*/
 	display: inline-block;
 	float: left;
@@ -31,10 +34,10 @@
 	position: relative;
 }
 
-.time_items .time_icon .time_icon_arrow:before,
-.time_items .time_icon .time_icon_arrow:after,
-.time_items .time_icon:before,
-.time_items .time_icon:after {
+.time_v1 .time_items .time_icon .time_icon_arrow:before,
+.time_v1 .time_items .time_icon .time_icon_arrow:after,
+.time_v1 .time_items .time_icon:before,
+.time_v1 .time_items .time_icon:after {
 	/*时间轴各时间段图标*/
 	border: 0.5em solid transparent;
 	border-left: 0.5em solid #fff;
@@ -46,20 +49,85 @@
 	content: ' ';
 	font-size: 2em;
 }
-.time_items .time_icon .time_icon_arrow:before,
-.time_items .time_icon .time_icon_arrow:after{
+.time_v1 .time_items .time_icon .time_icon_arrow:before,
+.time_v1 .time_items .time_icon .time_icon_arrow:after{
 	right: -16px;
 }
-.time_items .time_icon:before {
+.time_v1 .time_items .time_icon:before {
 	/*时间轴各时间段图标*/
 	border-left-color: #f00;
 	right: -26px;
 }
-.time_items .time_icon .time_icon_arrow:before{
+.time_v1 .time_items .time_icon .time_icon_arrow:before{
 	/*时间轴各时间段图标*/
 	border-left-color: #f00;
 	right: -19px;
 }
+
+.time_items .time_info {
+	/*时间轴各时间段对应时间*/
+}
+
+.time_items .time_detail {
+	/*时间轴各时间段对应具体信息*/
+}
+
+
+.time_line{
+	/*时间轴模块 v2.0*/
+}
+
+.time_line.time_v2{
+	}
+.time_list {
+	list-style: none;
+	color: #777;
+}
+
+.time_items {
+	/*时间轴各时间段*/
+	display: inline-block;
+	text-align: left;
+}
+
+.time_items .time_icon {
+	/*时间轴各时间段图标*/
+	display: inline-block;
+	position: relative;
+	bottom: -8px;
+	left: 0;
+	font-size: 12px;
+	z-index: 2;
+	background-color: #fff;
+}
+.time_items .time_line{
+	/*时间轴各时间段图标*/
+	display: inline-block;
+	height: 1px;
+	width: 100%;
+    border-bottom: 3px solid #777;
+    position: relative;
+    left: 0;
+    top: -19px;
+	z-index: 1;
+}
+.last .time_icon{
+	/*时间轴各时间段图标*/
+    bottom: 12px;
+    left: 100%;
+}
+.last .time_line{
+	/*时间轴各时间段图标*/
+	top: 6px;
+}
+
+ .time_line.bd-primary{
+ 	border-color: #337ab7;
+ }
+
+ .time_line.bd-danger{
+ 	border-color: #f00;
+ }
 
 .time_items .time_info {
 	/*时间轴各时间段对应时间*/
