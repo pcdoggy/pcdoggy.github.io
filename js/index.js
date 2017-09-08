@@ -18,12 +18,8 @@ $(function() {
 		",dspm" + dspm +
 		",ln" + ln);
 
-	var vinter = setInterval(mainFn.cur_time(), 1000);
+	var vinter = setInterval(mainFn.cur_time, 1000);
 
-	var vset = setTimeout(function() {
-		clearInterval(vinter);
-	}, 20000);
-	clearTimeout(vset, 21000);
 })
 
 // 首页函数相关
@@ -87,10 +83,12 @@ var mainFn = {
 	cur_time: function() {
 		var today = new Date();
 
-		var seperator2 = ":";
-		var vcurtime = today.getHours() + seperator2 + today.getMinutes() +
-			seperator2 + today.getSeconds();
-		console.log(vcurtime);
-		return vcurtime;
+		var seperator2 = ":",
+			vmin = today.getMinutes(),
+			vsec = today.getSeconds();
+		var vcurtime = today.getHours() + seperator2 + (vmin < 10 ? ("0" + vmin) : vmin) +
+			seperator2 + (vsec < 10 ? ("0" + vsec) : vsec);
+		var $time=$(".time:eq(0)");
+		$time.html(vcurtime);
 	}
 }
