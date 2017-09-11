@@ -1,0 +1,42 @@
+body,div{
+	padding: 0;
+	margin: 0;
+}
+
+.container-1{
+	/*display: block;*/
+}
+
+.dis-block{
+	display: block;
+	width: 20px;
+	height: 20px;
+	border: 2px solid #eee;
+	background-color: #009DE7;
+}
+
+.container-2{
+	/*display: inline-block;*/
+	/*display: inline-block;间距默认占据空位，间距和行高最大高度根据父级字符大小*/
+	font-size: 0;
+}
+
+.dis-inline-block{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	border: 2px solid #eee;
+	background-color: #009DE7;
+}
+
+.container-3{
+	/*display: inline;*/
+}
+
+.dis-inline{
+	display: inline;
+	width: 20px;
+	height: 20px;
+	border: 2px solid #eee;
+	background-color: #009DE7;
+}

@@ -1,0 +1,114 @@
+.vh-modal {
+	height: 640px;
+	border: 1px solid #ccc;
+	position: relative;
+}
+
+.vh-modal .vh-modal-content {
+	min-width: 50%;
+	max-width: 80%;
+	background: #fff;
+	border: 1px solid rgba(0, 0, 0, .2);
+	box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+	white-space: wrap;
+}
+
+.vh-modal .vh-modal-title {
+	padding: 20px;
+	font-size: 20px;
+	border-bottom: 1px solid #ccc;
+	text-align: left;
+	margin: 0;
+}
+
+.vh-modal .vh-modal-body {
+	padding: 20px;
+	text-align: left;
+}
+
+.vh-modal .vh-modal-foot {
+	text-align: right;
+	padding: 20px;
+	border-top: 1px solid #ccc;
+}
+
+
+/*:before*/
+
+.vh-modal-1 {
+	text-align: center; //水平居中
+	font-size: 0;
+	/*消除空隙, 见 https://smohan.net/blog/6gr77h*/
+}
+
+
+/*这里也可以使用一个真实元素标签*/
+
+.vh-modal-1::before,
+.vh-modal-1 .vh-modal-content {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 14px;
+}
+
+.vh-modal-1::before {
+	content: '';
+	height: 100%;
+}
+
+
+/*:before*/
+
+
+/*transform*/
+
+.vh-modal-2 .vh-modal-content {
+	/*尽可能的不要让该元素的宽度或者高度出现奇数，否则可能会导致模糊*/
+	display: inline-block;
+	/*为了自适应宽度，可以固定宽度*/
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+
+/*transform*/
+
+
+/*table-cell*/
+
+.vh-modal-3 {
+	display: table;
+	width: 100%;
+}
+
+.vh-modal-3 .vh-modal-cell {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.vh-modal-3 .vh-modal-content {
+	display: inline-block;
+}
+
+
+/*flex*/
+
+.vh-modal-4 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.vh-modal-4 .vh-modal-content {}
+
+.vh-modal-5 {
+	display: flex;
+	margin: 0;
+}
+
+.vh-modal-5 .vh-modal-content {
+	margin: auto;
+}
