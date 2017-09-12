@@ -1,0 +1,71 @@
+.container {
+	display: -webkit-flex;
+	display: flex;
+	border: 1px solid #00CE7D;
+	margin-bottom: 20px;
+}
+
+
+/*簡單佈局-start*/
+
+nav {
+	width: 200px;
+}
+
+.flex-column {
+	-webkit-flex: 1;
+	flex: 1;
+	border: 1px solid #31B0D5;
+}
+
+
+/*簡單佈局-end*/
+
+
+/*牛逼佈局-start*/
+
+.initial {
+	-webkit-flex: initial;
+	flex: initial;
+	width: 200px;
+	min-width: 100px;
+	border: 1px solid #31B0D5;
+}
+
+.none {
+	-webkit-flex: none;
+	flex: none;
+	width: 200px;
+	border: 1px solid #2AC8D1;
+}
+
+.flex1 {
+	-webkit-flex: 1;
+	flex: 1;
+	border: 1px solid #009DE7;
+}
+
+.flex2 {
+	-webkit-flex: 2;
+	flex: 2;
+}
+
+
+/*牛逼佈局-end*/
+
+
+/*居中佈局-start*/
+
+.vertical-container {
+	height: 300px;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-align-items: center;
+	align-items: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	border: 1px solid #00CE7D;
+}
+
+
+/*居中佈局-end*/
