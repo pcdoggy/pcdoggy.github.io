@@ -9,8 +9,8 @@ body,div{
 
 .dis-block{
 	display: block;
-	width: 20px;
-	height: 20px;
+	width: 120px;
+	height: 120px;
 	border: 2px solid #eee;
 	background-color: #009DE7;
 }
@@ -18,13 +18,15 @@ body,div{
 .container-2{
 	/*display: inline-block;*/
 	/*display: inline-block;间距默认占据空位，间距和行高最大高度根据父级字符大小*/
+	/*垂直對齊方式：文本基綫*/
 	font-size: 0;
 }
 
 .dis-inline-block{
 	display: inline-block;
-	width: 20px;
-	height: 20px;
+	width: 120px;
+	height: 120px;
+	font-size: 13px;;
 	border: 2px solid #eee;
 	background-color: #009DE7;
 }
@@ -35,8 +37,22 @@ body,div{
 
 .dis-inline{
 	display: inline;
-	width: 20px;
-	height: 20px;
+	width: 120px;
+	height: 120px;
+	border: 2px solid #eee;
+	background-color: #009DE7;
+}
+
+.container-4{
+	/*float: left;*/
+	overflow: hidden;
+	/*垂直對齊方式：框頂部*/
+}
+
+.dis-float{
+	float: left;
+	width: 120px;
+	height: 120px;
 	border: 2px solid #eee;
 	background-color: #009DE7;
 }
