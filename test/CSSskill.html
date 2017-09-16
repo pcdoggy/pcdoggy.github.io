@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="css/CSSskill.css" />
+		<title>CSS技巧和细节</title>
+	</head>
+
+	<body>
+		<h1>CSS技巧</h1>
+		<section>
+			<h2>liner-gradient()</h2>
+			<p>
+				creates a linear, progressive transition between two or more colors.<br> 在两个或多个颜色之间创建线性、渐进过渡。
+			</p>
+			<div>
+				<h3>引入</h3>
+				<div class="divExamples" style="background: linear-gradient(45deg, blue, red);">
+					<pre>   /* A gradient tilted 45 degrees,
+   starting blue and finishing red */
+   linear-gradient(45deg, blue, red);</pre>
+				</div>
+				<div class="divExamples" style="background: linear-gradient(to left top, blue, red);">
+					<pre>   /* A gradient going from the bottom right to the top left corner,
+   starting blue and finishing red */
+   linear-gradient(to left top, blue, red);</pre>
+				</div>
+				<div class="divExamples" style="background: linear-gradient(0deg, blue, green 40%, red);">
+					<pre>   /* A gradient going from the bottom to top,
+   starting blue, turning green at 40% of its length,
+   and finishing red */
+   linear-gradient(0deg, blue, green 40%, red);</pre>
+				</div>
+			</div>
+			<div>
+				<h3>Formal syntax</h3>
+				<pre>
+linear-gradient( 
+  [ &lt;angle&gt; | to &lt;side-or-corner&gt; ,]? &lt;color-stop&gt; [, &lt;color-stop&gt;]+ )
+  \---------------------------------/ \----------------------------/
+    Definition of the gradient line        List of color stops  
+
+where &lt;side-or-corner&gt; = [left | right] || [top | bottom]
+  and &lt;color-stop&gt;     = &lt;color&gt; [ &lt;percentage&gt; | &lt;length&gt; ]?</pre>
+			</div>
+			<div>
+				<h3>例子</h3>
+				<div class="divExamples" style="background: linear-gradient(135deg, red, blue);">
+					<pre>   Gradient at a 45-degree angle
+   linear-gradient(135deg, red, blue);</pre>
+				</div>
+				<div class="divExamples" style="background: linear-gradient(135deg, red, red 60%, blue);">
+					<pre>   Gradient that starts at 60% of the gradient line
+   linear-gradient(135deg, red, red 60%, blue);</pre>
+				</div>
+				<div class="divExamples" style="background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);">
+					<pre>   Gradient with multiple color stops
+   linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);</pre>
+				</div>
+				<div class="divExamples" style="background: linear-gradient(to bottom right, red, transparent);">
+					<pre>   Linear gradient with transparency
+   linear-gradient(to bottom right, red, transparent);</pre>
+				</div>
+				<div class="divExamples">
+					<pre>   details in : https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient</pre>
+				</div>
+			</div>
+		</section>
+
+		<section>
+			<h2>repeating-linear-gradient()</h2>
+			<p>
+				It is similar to linear-gradient() and takes the same arguments, but it repeats the color stops infinitely in all directions so as to cover its entire container.<br> 从原点（梯度中心）辐射的两种或多种颜色之间的渐变。它的形状可能是圆形或椭圆形。
+			</p>
+			<div>
+				<h3>引入</h3>
+				<div class="divExamples" style="background: repeating-linear-gradient(45deg, blue, red);">
+					<pre>   /* A repeating gradient tilted 45 degrees,
+   starting blue and finishing red */
+   repeating-linear-gradient(45deg, blue, red);</pre>
+				</div>
+				<div class="divExamples" style="background: repeating-linear-gradient(to left top, blue, red);">
+					<pre>   /* A repeating gradient going from the bottom right to the top left corner,
+   starting blue and finishing red */
+   repeating-linear-gradient(to left top, blue, red);</pre>
+				</div>
+				<div class="divExamples" style="background: repeating-linear-gradient(0deg, blue, green 40%, red);">
+					<pre>   /* A repeating gradient going from the bottom to top,
+   starting blue, turning green at 40% of its length,
+   and finishing red */
+   repeating-linear-gradient(0deg, blue, green 40%, red);</pre>
+				</div>
+			</div>
+			<div>
+				<h3>Formal syntax</h3>
+				<pre>
+repeating-linear-gradient( 
+  [ &lt;angle&gt; | to &lt;side-or-corner&gt; ,]? &lt;color-stop&gt; [, &lt;color-stop&gt;]+ )
+  \---------------------------------/ \----------------------------/
+    Definition of the gradient line        List of color stops  
+
+where &lt;side-or-corner&gt; = [left | right] || [top | bottom]
+  and &lt;color-stop&gt;     = &lt;color&gt; [ &lt;percentage&gt; | &lt;length&gt; ]?</pre>
+			</div>
+			<div>
+				<h3>例子</h3>
+				<div class="divExamples" style="background-image: repeating-linear-gradient(180deg,
+      rgb(26,198,204),
+      rgb(26,198,204) 7%,
+      rgb(100,100,100) 10%);">
+					<pre>   Repeating horizontal bars
+   background-image: repeating-linear-gradient(180deg,
+      rgb(26,198,204),
+      rgb(26,198,204) 7%,
+      rgb(100,100,100) 10%);</pre>
+				</div>
+				<div class="divExamples" style="background-image: repeating-linear-gradient(-45deg,
+      transparent,
+      transparent 25px,
+      rgba(0,0,0,.6) 25px,
+      rgba(0,0,0,.6) 50px);">
+					<pre>   Zebra stripes
+   background-image: repeating-linear-gradient(-45deg,
+      transparent,
+      transparent 25px,
+      rgba(0,0,0,.6) 25px,
+      rgba(0,0,0,.6) 50px);</pre>
+				</div>
+				<div class="divExamples">
+					<pre>   details in : https://developer.mozilla.org/en-US/docs/Web/CSS/repeating-linear-gradient</pre>
+				</div>
+			</div>
+		</section>
+
+		<section>
+			<h2>radial-gradient()</h2>
+			<p>
+				a progressive transition between two or more colors radiating from an origin (the center of the gradient). Its shape may be a circle or an ellipse.<br> 从原点（梯度中心）辐射的两种或多种颜色之间的渐变。它的形状可能是圆形或椭圆形。
+			</p>
+			<div>
+				<h3>引入</h3>
+				<div class="divExamples" style="background: radial-gradient(circle at center, red 0, blue, green 100%);">
+					<pre>   /* A gradient at the center of its container,
+   starting red, changing to blue, and finishing green */
+   linear-gradient(circle at center, red 0, blue, green 100%);</pre>
+				</div>
+			</div>
+			<div>
+				<h3>Formal syntax</h3>
+				<pre>
+radial-gradient(
+  [ [ circle || &lt;length> ]                         [ at &lt;position> ]? , |
+    [ ellipse || [ &lt;length&gt; | &lt;percentage&gt; ]{2} ]  [ at &lt;position&gt; ]? , |
+    [ [ circle | ellipse ] || &lt;extent-keyword&gt; ]   [ at &lt;position&gt; ]? , |
+    at &lt;position&gt; ,
+  ]?
+  &lt;color-stop&gt; [ , &lt;color-stop&gt; ]+
+)
+where &lt;extent-keyword&gt; = closest-corner | closest-side | farthest-corner | farthest-side
+  and &lt;color-stop&gt;     = &lt;color&gt; [ &lt;percentage&gt; | &lt;length&gt; ]?</pre>
+			</div>
+			
+			<div>
+				<h3>例子</h3>
+				<div class="divExamples" style="width: 50vh;height: 50vh; background-image: radial-gradient(ellipse farthest-corner at 45px 45px , 
+					#00FFFF 0%, 
+					rgba(0, 0, 255, 0) 50%, 
+					#0000FF 95%);">
+					<pre>   Repeating horizontal bars
+   background-image: radial-gradient(ellipse farthest-corner at 45px 45px , #00FFFF 0%, rgba(0, 0, 255, 0) 50%, #0000FF 95%);</pre>
+				</div>
+				<div class="divExamples" style="width: 50vh;height: 50vh; background-image: radial-gradient(ellipse farthest-corner at 470px 47px , 
+					#FFFF80 20%, 
+					rgba(204, 153, 153, 0.4) 30%, 
+					#E6E6FF 60%);">
+					<pre>   Repeating horizontal bars
+   background-image: radial-gradient(ellipse farthest-corner at 470px 47px , #FFFF80 20%, rgba(204, 153, 153, 0.4) 30%, #E6E6FF 60%);</pre>
+				</div>
+				<div class="divExamples" style="width: 50vh;height: 50vh; background-image: radial-gradient(farthest-corner at 45px 45px , 
+					#FF0000 0%, 
+					#0000FF 100%);">
+					<pre>   Repeating horizontal bars
+   background-image: radial-gradient(farthest-corner at 45px 45px , #FF0000 0%, #0000FF 100%);</pre>
+				</div>
+				<div class="divExamples">
+					<pre>   details in : https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient</pre>
+				</div>
+			</div>
+		</section>
+
+	</body>
+
+</html>
