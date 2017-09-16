@@ -1,0 +1,39 @@
+/*body {
+  margin: 0;
+  padding: 0;
+  height: 5000px;
+}
+
+.scroll-indicator {
+  position: fixed;
+  height: 8px;
+  top: 0;
+  left: 0;
+  background: #369;
+}*/
+
+.main {
+	margin: 0;
+	padding: 0;
+	display: block;
+	height: 30000px;
+	text-align: center;
+	line-height: 100px;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background: linear-gradient(to right top, #369 50%, #fff 50%);
+	background-size: 100% calc(100% - 99vh);
+}
+
+body:before {
+	content: '';
+	position: fixed;
+	top: 4px;
+	bottom: 0;
+	width: 100%;
+	z-index: -1;
+	background: #fff;
+}
