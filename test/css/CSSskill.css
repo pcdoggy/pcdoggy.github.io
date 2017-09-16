@@ -1,2 +1,37 @@
 
 .divExamples{width: 100%;min-height: 20px; margin-bottom:10px; border: 1px solid #000;}
+
+.banner {
+  position: absolute;
+  left: 5%;                 /* fallback for browsers without support for calc() */
+  left: calc(40px);
+  width: 90%;               /* fallback for browsers without support for calc() */
+  width: calc(100% - 80px);
+  border: solid black 1px;
+  box-shadow: 1px 2px;
+  background-color: yellow;
+  padding: 6px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+input {
+  padding: 2px;
+  display: block;
+  width: 98%;               /* fallback for browsers without support for calc() */
+  width: calc(100% - 1em);
+}
+
+#formbox {
+  width: 130px;             /* fallback for browsers without support for calc() */
+  width: calc(100% / 6);
+  border: 1px solid black;
+  padding: 4px;
+}
+
+.foo {
+  --widthA: 100px;
+  --widthB: calc(var(--widthA) / 2);
+  --widthC: calc(var(--widthB) / 2);
+  width: var(--widthC);
+}
