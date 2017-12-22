@@ -1,77 +1,81 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>学习BFC-Block Formatting Context</title>
-		<link rel="stylesheet" type="text/css" href="css/learnBFC.css"/>
-	</head>
-	<body>
-		<div>
-		<h1>实例一</h1>
-		<div class="box">
-			<div class="left"></div>
-			<div class="right"></div>
-		</div>
-		<pre class="clear">
+
+<head>
+    <meta charset="UTF-8">
+    <title>学习BFC-Block Formatting Context</title>
+    <link rel="shortcut icon" href="../dist/icon/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="css/learnBFC.css" />
+</head>
+
+<body>
+    <div>
+        <h1>实例一</h1>
+        <div class="box">
+            <div class="left"></div>
+            <div class="right"></div>
+        </div>
+        <pre class="clear">
 			
 	绿色框（'#left'）向左浮动，它创建了一个新BFC，但暂时不讨论它所创建的BFC。由于绿色框浮动了，它脱离了原本normal flow的位置，因此，粉色框（'#right'）就被定位到灰色父元素的左上角（特性3：元素左边与容器左边相接触），与浮动绿色框发生了重叠。
 	同时，由于灰色框（'#box'）并没有创建BFC，因此在计算高度的时候，并没有考虑绿色框的区域（特性6：浮动区域不叠加到BFC区域上），发生了高度坍塌，这也是常见问题之一。
 		</pre>
-		</div>
-		
-		<div>
-		<h1>实例二</h1>
-		<div class="box BFC">
-			<div class="left"></div>
-			<div class="right"></div>
-		</div>
-		<pre class="clear">
+    </div>
+
+    <div>
+        <h1>实例二</h1>
+        <div class="box BFC">
+            <div class="left"></div>
+            <div class="right"></div>
+        </div>
+        <pre class="clear">
 			
 	通过设置overflow:hidden创建BFC。
 	灰色框创建了一个新的BFC后，高度发生了变化，
 	计算高度时它将绿色框区域也考虑进去了（特性5：计算BFC的高度时，浮动元素也参与计算）；
 	而绿色框和红色框的显示效果仍然没有任何变化。
 		</pre>
-		</div>
-		
-		<div>
-		<h1>实例三</h1>
-		<div class="box BFC">
-			<div class="left"></div>
-			<div class="right">
-        <div class='little'></div>
-        <div class='little'></div>
-        <div class='little'></div>
-			</div>
-		</div>
-		<pre class="clear">
+    </div>
+
+    <div>
+        <h1>实例三</h1>
+        <div class="box BFC">
+            <div class="left"></div>
+            <div class="right">
+                <div class='little'></div>
+                <div class='little'></div>
+                <div class='little'></div>
+            </div>
+        </div>
+        <pre class="clear">
 			
 	将一些小块添加到粉色框中。
 		</pre>
-		</div>
-		
-		<div>
-		<h1>实例四</h1>
-		<div class="box BFC">
-			<div class="left"></div>
-			<div class="right BFC">
-        <div class='little'></div>
-        <div class='little'></div>
-        <div class='little'></div>
-			</div>
-		</div>
-		<pre class="clear">
+    </div>
+
+    <div>
+        <h1>实例四</h1>
+        <div class="box BFC">
+            <div class="left"></div>
+            <div class="right BFC">
+                <div class='little'></div>
+                <div class='little'></div>
+                <div class='little'></div>
+            </div>
+        </div>
+        <pre class="clear">
 			
 	为粉色框创建BFC。
 	一旦粉色框创建了新的BFC以后，粉色框就不与绿色浮动框发生重叠了，
 	同时内部的白色块处于隔离的空间（特性4：BFC就是页面上的一个隔离的独立容器），白色块也不会受到绿色浮动框的挤压。
 		</pre>
-		</div>
-		
-		<h1>总结</h1>
-		<pre>
+    </div>
+
+    <h1>总结</h1>
+    <pre>
 	以上就是BFC的分析，BFC的概念比较抽象，但通过实例分析应该能够更好地理解BFC。
 	在实际中，利用BFC可以闭合浮动（实例二），防止与浮动元素重叠（实例四）。同时，由于BFC的隔离作用，可以利用BFC包含一个元素，防止这个元素与BFC外的元素发生margin collapse。
 		</pre>
-	</body>
+</body>
+
 </html>
