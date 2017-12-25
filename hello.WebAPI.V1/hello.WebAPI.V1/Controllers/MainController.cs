@@ -2,6 +2,7 @@
 using hello.WebAPI.V1.Models;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
@@ -12,6 +13,155 @@ namespace hello.WebAPI.V1.Controllers
 {
     public class MainController : ApiController
     {
+        [HttpPost]
+        public async Task<JsonResult> UserLogin()
+        {
+            string code = "";
+            string errormsg = "";
+            string username = string.Empty, userpass = string.Empty, timestamp = string.Empty;
+
+            // 入参校验
+            Dictionary<string, string> listpar = new Dictionary<string, string>();
+            listpar.Add("username", "");
+            listpar.Add("userpass", "");
+            listpar.Add("timestamp", "");
+
+            JObject returnJson = new JObject();
+
+            try
+            {
+                // multipart/formdata
+                var vstream = await Request.Content.ReadAsMultipartAsync();
+                var vcontents = vstream.Contents;
+                foreach (var vcontent in vcontents)
+                {
+                    switch (vcontent.Headers.ContentDisposition.Name)
+                    {
+                        case "username":
+                            username = await vcontent.ReadAsStringAsync();
+                            if (username == null)
+                            {
+                                code = ((int)Enums.ApiCodes.未提供username属性值).ToString();// "1005";
+                                errormsg = Enums.ApiCodes.未提供username属性值.ToString();// "未提供appkey属性值";
+                            }
+                            else
+                            {
+                                listpar.Remove("username");
+                            }
+                            username = CommFn.RemoveEnterAndWrap(username);
+                            break;
+                        case "userpass":
+                            userpass = await vcontent.ReadAsStringAsync();
+                            if (userpass == null)
+                            {
+                                code = ((int)Enums.ApiCodes.未提供userpass属性值).ToString();// "1005";
+                                errormsg = Enums.ApiCodes.未提供userpass属性值.ToString();// "未提供appkey属性值";
+                            }
+                            else
+                            {
+                                listpar.Remove("userpass");
+                            }
+                            userpass = CommFn.RemoveEnterAndWrap(userpass);
+                            break;
+                        case "timestamp":
+                            timestamp = await vcontent.ReadAsStringAsync();
+                            if (timestamp == null)
+                            {
+                                code = ((int)Enums.ApiCodes.未提供timestamp属性值).ToString();// "1005";
+                                errormsg = Enums.ApiCodes.未提供timestamp属性值.ToString();// "未提供appkey属性值";
+                            }
+                            else
+                            {
+                                listpar.Remove("timestamp");
+                            }
+                            timestamp = CommFn.RemoveEnterAndWrap(timestamp);
+                            break;
+                    }
+                    if (code != "")
+                    {
+                        break;
+                    }
+                }
+
+                if (code != "")
+                {
+                    returnJson.Add("Success", false);
+                    returnJson.Add("Code", code);
+                    returnJson.Add("Message", errormsg);
+                    returnJson.Add("Result", null);
+                }
+                else
+                {
+                    if (listpar.Count > 0)//参数不完整
+                    {
+                        string strs = "";
+                        foreach (var par in listpar)
+                        {
+                            strs = strs + "[" + par.Key + "]";
+                        }
+
+                        code = ((int)Enums.ApiCodes.未提供属性值).ToString();// "1000";
+                        errormsg = "参数" + strs + "未提供属性值";
+
+                        returnJson.Add("Success", false);
+                        returnJson.Add("Code", code);
+                        returnJson.Add("Message", errormsg);
+                        returnJson.Add("Result", null);
+                    }
+                    else//参数完整则进入正式处理流程
+                    {
+                        ApiModels rfm = new ApiModels();
+
+                        if (rfm.CheckTimestamp(timestamp) == false)//校验timestamp
+                        {
+                            code = ((int)Enums.ApiCodes.非法调用timestamp).ToString();
+                            errormsg = GetDescription.getdescription(Enums.ApiCodes.tokenout);// "非法调用,时间戳格式不正确或时间戳异常!";
+                            returnJson.Add("Success", false);
+                            returnJson.Add("Code", code);
+                            returnJson.Add("Message", errormsg);
+                            returnJson.Add("Result", null);
+                            return new JsonResult(returnJson.ToString(Newtonsoft.Json.Formatting.Indented), this.Request);
+                        }
+
+                        //byte[] datas = Convert.FromBase64String(data);
+                        //string datastr = Encoding.UTF8.GetString(datas);
+
+                        //JObject datajson = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(datastr);
+                        //string type = CommFn.GetJsonItemValue<string>(datajson, "Type");
+                        //JObject pardata = CommFn.GetJsonItemValue<JObject>(datajson, "Data");
+                        //if (type == null || pardata == null)
+                        //{
+                        //    code = ((int)Enums.ApiCodes.未指定调用的接口类型或未传入接口参数).ToString();// "1005";
+                        //    errormsg = Enums.ApiCodes.未指定调用的接口类型或未传入接口参数.ToString(); // "未指定调用的接口类型或未传入接口参数!";
+                        //    returnJson.Add("Success", false);
+                        //    returnJson.Add("Code", code);
+                        //    returnJson.Add("Message", errormsg);
+                        //    returnJson.Add("Result", null);
+                        //}
+                        //else
+                        //{
+                        //    returnJson = rfm.CallInterFace(type, pardata, ver);//调用接口业务处理
+                        //}
+                        return new JsonResult(returnJson.ToString(Newtonsoft.Json.Formatting.Indented), this.Request);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.WriteLog("登录验证出错，原因为：" + ex.Message);
+
+                code = ((int)Enums.ApiCodes.系统错误).ToString();
+                errormsg = "发生错误!详细信息:" + ex.Message;
+
+                returnJson.Add("Success", false);
+                returnJson.Add("Code", code);
+                returnJson.Add("Message", errormsg);
+                returnJson.Add("Result", null);
+            }
+
+            return new JsonResult(returnJson.ToString(Newtonsoft.Json.Formatting.Indented), this.Request);
+        }
+
         // API请求入口
         [HttpPost]
         public async Task<JsonResult> DatasInterface()
@@ -24,6 +174,7 @@ namespace hello.WebAPI.V1.Controllers
             string sign = "";
             string ver = "";
 
+            // 入参校验
             Dictionary<string, string> Listpar = new Dictionary<string, string>();
             Listpar.Add("appkey", "");
             Listpar.Add("timestamp", "");
@@ -46,8 +197,8 @@ namespace hello.WebAPI.V1.Controllers
                             appkey = await content.ReadAsStringAsync();
                             if (appkey == null)
                             {
-                                code = "1005";
-                                errormsg = "未提供appkey属性值";
+                                code = ((int)Enums.ApiCodes.未提供appkey属性值).ToString();// "1005";
+                                errormsg = Enums.ApiCodes.未提供appkey属性值.ToString();// "未提供appkey属性值";
                             }
                             else
                             {
@@ -59,8 +210,8 @@ namespace hello.WebAPI.V1.Controllers
                             timestamp = await content.ReadAsStringAsync();
                             if (timestamp == null)
                             {
-                                code = "1005";
-                                errormsg = "未提供timestamp属性值";
+                                code = ((int)Enums.ApiCodes.未提供timestamp属性值).ToString();// "1005";
+                                errormsg = Enums.ApiCodes.未提供timestamp属性值.ToString();// "未提供timestamp属性值";
                             }
                             else
                             {
@@ -72,8 +223,8 @@ namespace hello.WebAPI.V1.Controllers
                             data = await content.ReadAsStringAsync();
                             if (data == null)
                             {
-                                code = "1005";
-                                errormsg = "未提供data属性值";
+                                code = ((int)Enums.ApiCodes.未提供data属性值).ToString();// "1005";
+                                errormsg = Enums.ApiCodes.未提供data属性值.ToString();// "未提供data属性值";
                             }
                             else
                             {
@@ -85,8 +236,8 @@ namespace hello.WebAPI.V1.Controllers
                             sign = await content.ReadAsStringAsync();
                             if (sign == null)
                             {
-                                code = "1005";
-                                errormsg = "未提供sign属性值";
+                                code = ((int)Enums.ApiCodes.未提供sign属性值).ToString();// "1005";
+                                errormsg = Enums.ApiCodes.未提供sign属性值.ToString();// "未提供sign属性值";
                             }
                             else
                             {
@@ -98,8 +249,8 @@ namespace hello.WebAPI.V1.Controllers
                             ver = await content.ReadAsStringAsync();
                             if (ver == null)
                             {
-                                code = "1005";
-                                errormsg = "未提供ver属性值";
+                                code = ((int)Enums.ApiCodes.未提供ver属性值).ToString();// "1005";
+                                errormsg = Enums.ApiCodes.未提供ver属性值.ToString();// "未提供ver属性值";
                             }
                             else
                             {
@@ -130,7 +281,7 @@ namespace hello.WebAPI.V1.Controllers
                             strs = strs + "[" + par.Key + "]";
                         }
 
-                        code = "1005";
+                        code = ((int)Enums.ApiCodes.未提供属性值).ToString();// "1000";
                         errormsg = "参数" + strs + "未提供属性值";
 
                         ReturnJson.Add("Success", false);
@@ -140,13 +291,12 @@ namespace hello.WebAPI.V1.Controllers
                     }
                     else//参数完整则进入正式处理流程
                     {
-
                         ApiModels rfm = new ApiModels();
 
                         if (rfm.CheckTimestamp(timestamp) == false)//校验timestamp
                         {
-                            code = "1001";
-                            errormsg = "非法调用,时间戳格式不正确或时间戳异常!";
+                            code = ((int)Enums.ApiCodes.非法调用timestamp).ToString();
+                            errormsg = GetDescription.getdescription(Enums.ApiCodes.tokenout);// "非法调用,时间戳格式不正确或时间戳异常!";
                             ReturnJson.Add("Success", false);
                             ReturnJson.Add("Code", code);
                             ReturnJson.Add("Message", errormsg);
@@ -159,7 +309,7 @@ namespace hello.WebAPI.V1.Controllers
                         {
                             if (checkappkey == -1)
                             {
-                                code = "9999";
+                                code = ((int)Enums.ApiCodes.自定义错误描述).ToString();// "9999";
                                 errormsg = "数据连接失败!";
                                 ReturnJson.Add("Success", false);
                                 ReturnJson.Add("Code", code);
@@ -168,8 +318,8 @@ namespace hello.WebAPI.V1.Controllers
                             }
                             else if (checkappkey == -2)
                             {
-                                code = "1001";
-                                errormsg = "非法调用,AppKey不合法!";
+                                code = ((int)Enums.ApiCodes.非法调用appkey).ToString();// "1001";
+                                errormsg = Enums.ApiCodes.非法调用appkey.ToString(); // "非法调用,AppKey不合法!";
                                 ReturnJson.Add("Success", false);
                                 ReturnJson.Add("Code", code);
                                 ReturnJson.Add("Message", errormsg);
@@ -177,8 +327,8 @@ namespace hello.WebAPI.V1.Controllers
                             }
                             else
                             {
-                                code = "1001";
-                                errormsg = "非法调用,数据签名sign不合法!";
+                                code = ((int)Enums.ApiCodes.非法调用sign).ToString();// "1001";
+                                errormsg = Enums.ApiCodes.非法调用sign.ToString(); // "非法调用,数据签名sign不合法!";
                                 ReturnJson.Add("Success", false);
                                 ReturnJson.Add("Code", code);
                                 ReturnJson.Add("Message", errormsg);
@@ -195,8 +345,8 @@ namespace hello.WebAPI.V1.Controllers
                         JObject pardata = CommFn.GetJsonItemValue<JObject>(datajson, "Data");
                         if (type == null || pardata == null)
                         {
-                            code = "1005";
-                            errormsg = "未指定调用的接口类型或未传入接口参数!";
+                            code = ((int)Enums.ApiCodes.未指定调用的接口类型或未传入接口参数).ToString();// "1005";
+                            errormsg = Enums.ApiCodes.未指定调用的接口类型或未传入接口参数.ToString(); // "未指定调用的接口类型或未传入接口参数!";
                             ReturnJson.Add("Success", false);
                             ReturnJson.Add("Code", code);
                             ReturnJson.Add("Message", errormsg);
@@ -213,9 +363,9 @@ namespace hello.WebAPI.V1.Controllers
             catch (Exception ex)
             {
                 //调用日志类的写日志的方法，将错误信息传入  
-                Log.WriteLog(ex.Message);
+                Log.WriteLog("接口入口验证出错，原因为：" + ex.Message);
 
-                code = "1004";
+                code = ((int)Enums.ApiCodes.系统错误).ToString();
                 errormsg = "发生错误!详细信息:" + ex.Message;
 
                 ReturnJson.Add("Success", false);

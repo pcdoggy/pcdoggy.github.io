@@ -81,14 +81,15 @@ namespace hello.WebAPI.V1.Models
             JObject ReturnJson = new JObject();
             switch (type)
             {
-                case "GetToken":
+                case "UserLogin":
+                    //Enums.ApiTypes.UserLogin.ToString()
                     //ReturnJson = JKRFInterFaceModel.GetToken(ver, data);
                     break;
 
                 default:
                     ReturnJson.Add("Success", false);
-                    ReturnJson.Add("Code", "1002");
-                    ReturnJson.Add("Message", "不支持的接口类型!");
+                    ReturnJson.Add("Code", ((int)Enums.ApiCodes.不支持的接口类型).ToString());
+                    ReturnJson.Add("Message", Enums.ApiCodes.不支持的接口类型.ToString());
                     ReturnJson.Add("Result", null);
                     break;
             }
