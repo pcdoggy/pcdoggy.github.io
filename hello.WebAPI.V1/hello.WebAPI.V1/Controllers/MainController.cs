@@ -1,5 +1,6 @@
 ﻿using hello.WebAPI.V1.Common;
 using hello.WebAPI.V1.Models;
+using hello.WebAPI.V1.Util;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
@@ -85,10 +86,7 @@ namespace hello.WebAPI.V1.Controllers
 
                 if (code != "")
                 {
-                    returnJson.Add("Success", false);
-                    returnJson.Add("Code", code);
-                    returnJson.Add("Message", errormsg);
-                    returnJson.Add("Result", null);
+                    returnJson = CommFn.ErrorReturn(code, errormsg);
                 }
                 else
                 {
@@ -103,45 +101,21 @@ namespace hello.WebAPI.V1.Controllers
                         code = ((int)Enums.ApiCodes.未提供属性值).ToString();// "1000";
                         errormsg = "参数" + strs + "未提供属性值";
 
-                        returnJson.Add("Success", false);
-                        returnJson.Add("Code", code);
-                        returnJson.Add("Message", errormsg);
-                        returnJson.Add("Result", null);
+                        returnJson = CommFn.ErrorReturn(code, errormsg);
                     }
                     else//参数完整则进入正式处理流程
                     {
                         ApiModels rfm = new ApiModels();
 
-                        if (rfm.CheckTimestamp(timestamp) == false)//校验timestamp
+                        if (CommFn.CheckTimestamp(timestamp) == false)//校验timestamp
                         {
                             code = ((int)Enums.ApiCodes.非法调用timestamp).ToString();
                             errormsg = GetDescription.getdescription(Enums.ApiCodes.tokenout);// "非法调用,时间戳格式不正确或时间戳异常!";
-                            returnJson.Add("Success", false);
-                            returnJson.Add("Code", code);
-                            returnJson.Add("Message", errormsg);
-                            returnJson.Add("Result", null);
+                            returnJson = CommFn.ErrorReturn(code, errormsg);
                             return new JsonResult(returnJson.ToString(Newtonsoft.Json.Formatting.Indented), this.Request);
                         }
 
-                        //byte[] datas = Convert.FromBase64String(data);
-                        //string datastr = Encoding.UTF8.GetString(datas);
-
-                        //JObject datajson = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(datastr);
-                        //string type = CommFn.GetJsonItemValue<string>(datajson, "Type");
-                        //JObject pardata = CommFn.GetJsonItemValue<JObject>(datajson, "Data");
-                        //if (type == null || pardata == null)
-                        //{
-                        //    code = ((int)Enums.ApiCodes.未指定调用的接口类型或未传入接口参数).ToString();// "1005";
-                        //    errormsg = Enums.ApiCodes.未指定调用的接口类型或未传入接口参数.ToString(); // "未指定调用的接口类型或未传入接口参数!";
-                        //    returnJson.Add("Success", false);
-                        //    returnJson.Add("Code", code);
-                        //    returnJson.Add("Message", errormsg);
-                        //    returnJson.Add("Result", null);
-                        //}
-                        //else
-                        //{
-                        //    returnJson = rfm.CallInterFace(type, pardata, ver);//调用接口业务处理
-                        //}
+                        returnJson = ApiHelper.GetUser(username, userpass);//调用接口，登录入口业务处理
                         return new JsonResult(returnJson.ToString(Newtonsoft.Json.Formatting.Indented), this.Request);
                     }
                 }
@@ -153,16 +127,13 @@ namespace hello.WebAPI.V1.Controllers
                 code = ((int)Enums.ApiCodes.系统错误).ToString();
                 errormsg = "发生错误!详细信息:" + ex.Message;
 
-                returnJson.Add("Success", false);
-                returnJson.Add("Code", code);
-                returnJson.Add("Message", errormsg);
-                returnJson.Add("Result", null);
+                returnJson = CommFn.ErrorReturn(code, errormsg);
             }
 
             return new JsonResult(returnJson.ToString(Newtonsoft.Json.Formatting.Indented), this.Request);
         }
 
-        // API请求入口
+        // API请求入口，根据不同业务需求进行操作
         [HttpPost]
         public async Task<JsonResult> DatasInterface()
         {
@@ -176,14 +147,12 @@ namespace hello.WebAPI.V1.Controllers
 
             // 入参校验
             Dictionary<string, string> Listpar = new Dictionary<string, string>();
-            Listpar.Add("appkey", "");
             Listpar.Add("timestamp", "");
             Listpar.Add("data", "");
             Listpar.Add("sign", "");
             Listpar.Add("ver", "");
 
             JObject ReturnJson = new JObject();
-
             try
             {
                 // multipart/formdata
@@ -193,19 +162,6 @@ namespace hello.WebAPI.V1.Controllers
                 {
                     switch (content.Headers.ContentDisposition.Name)
                     {
-                        case "appkey":
-                            appkey = await content.ReadAsStringAsync();
-                            if (appkey == null)
-                            {
-                                code = ((int)Enums.ApiCodes.未提供appkey属性值).ToString();// "1005";
-                                errormsg = Enums.ApiCodes.未提供appkey属性值.ToString();// "未提供appkey属性值";
-                            }
-                            else
-                            {
-                                Listpar.Remove("appkey");
-                            }
-                            appkey = CommFn.RemoveEnterAndWrap(appkey);
-                            break;
                         case "timestamp":
                             timestamp = await content.ReadAsStringAsync();
                             if (timestamp == null)
@@ -266,10 +222,7 @@ namespace hello.WebAPI.V1.Controllers
                 }
                 if (code != "")
                 {
-                    ReturnJson.Add("Success", false);
-                    ReturnJson.Add("Code", code);
-                    ReturnJson.Add("Message", errormsg);
-                    ReturnJson.Add("Result", null);
+                    ReturnJson = CommFn.ErrorReturn(code, errormsg);
                 }
                 else
                 {
@@ -284,55 +237,42 @@ namespace hello.WebAPI.V1.Controllers
                         code = ((int)Enums.ApiCodes.未提供属性值).ToString();// "1000";
                         errormsg = "参数" + strs + "未提供属性值";
 
-                        ReturnJson.Add("Success", false);
-                        ReturnJson.Add("Code", code);
-                        ReturnJson.Add("Message", errormsg);
-                        ReturnJson.Add("Result", null);
+                        ReturnJson = CommFn.ErrorReturn(code, errormsg);
                     }
                     else//参数完整则进入正式处理流程
                     {
-                        ApiModels rfm = new ApiModels();
-
-                        if (rfm.CheckTimestamp(timestamp) == false)//校验timestamp
+                        if (CommFn.CheckTimestamp(timestamp) == false)//校验timestamp
                         {
                             code = ((int)Enums.ApiCodes.非法调用timestamp).ToString();
                             errormsg = GetDescription.getdescription(Enums.ApiCodes.tokenout);// "非法调用,时间戳格式不正确或时间戳异常!";
-                            ReturnJson.Add("Success", false);
-                            ReturnJson.Add("Code", code);
-                            ReturnJson.Add("Message", errormsg);
-                            ReturnJson.Add("Result", null);
+
+                            ReturnJson = CommFn.ErrorReturn(code, errormsg);
                             return new JsonResult(ReturnJson.ToString(Newtonsoft.Json.Formatting.Indented), this.Request);
                         }
 
-                        int checkappkey = rfm.CheckAppkeyAndSign(appkey, timestamp, data, sign);
+                        int checkappkey = CommFn.CheckAppkeyAndSign(appkey, timestamp, data, sign);
                         if (checkappkey < 0)//校验appkey和sign
                         {
                             if (checkappkey == -1)
                             {
                                 code = ((int)Enums.ApiCodes.自定义错误描述).ToString();// "9999";
                                 errormsg = "数据连接失败!";
-                                ReturnJson.Add("Success", false);
-                                ReturnJson.Add("Code", code);
-                                ReturnJson.Add("Message", errormsg);
-                                ReturnJson.Add("Result", null);
+
+                                ReturnJson = CommFn.ErrorReturn(code, errormsg);
                             }
                             else if (checkappkey == -2)
                             {
                                 code = ((int)Enums.ApiCodes.非法调用appkey).ToString();// "1001";
                                 errormsg = Enums.ApiCodes.非法调用appkey.ToString(); // "非法调用,AppKey不合法!";
-                                ReturnJson.Add("Success", false);
-                                ReturnJson.Add("Code", code);
-                                ReturnJson.Add("Message", errormsg);
-                                ReturnJson.Add("Result", null);
+
+                                ReturnJson = CommFn.ErrorReturn(code, errormsg);
                             }
                             else
                             {
                                 code = ((int)Enums.ApiCodes.非法调用sign).ToString();// "1001";
                                 errormsg = Enums.ApiCodes.非法调用sign.ToString(); // "非法调用,数据签名sign不合法!";
-                                ReturnJson.Add("Success", false);
-                                ReturnJson.Add("Code", code);
-                                ReturnJson.Add("Message", errormsg);
-                                ReturnJson.Add("Result", null);
+
+                                ReturnJson = CommFn.ErrorReturn(code, errormsg);
                             }
                             return new JsonResult(ReturnJson.ToString(Newtonsoft.Json.Formatting.Indented), this.Request);
                         }
@@ -347,14 +287,12 @@ namespace hello.WebAPI.V1.Controllers
                         {
                             code = ((int)Enums.ApiCodes.未指定调用的接口类型或未传入接口参数).ToString();// "1005";
                             errormsg = Enums.ApiCodes.未指定调用的接口类型或未传入接口参数.ToString(); // "未指定调用的接口类型或未传入接口参数!";
-                            ReturnJson.Add("Success", false);
-                            ReturnJson.Add("Code", code);
-                            ReturnJson.Add("Message", errormsg);
-                            ReturnJson.Add("Result", null);
+
+                            ReturnJson = CommFn.ErrorReturn(code, errormsg);
                         }
                         else
                         {
-                            ReturnJson = rfm.CallInterFace(type, pardata, ver);//调用接口业务处理
+                            ReturnJson = ApiHelper.CallInterFace(type, pardata, ver);//调用接口业务处理
                         }
                         return new JsonResult(ReturnJson.ToString(Newtonsoft.Json.Formatting.Indented), this.Request);
                     }
@@ -368,10 +306,7 @@ namespace hello.WebAPI.V1.Controllers
                 code = ((int)Enums.ApiCodes.系统错误).ToString();
                 errormsg = "发生错误!详细信息:" + ex.Message;
 
-                ReturnJson.Add("Success", false);
-                ReturnJson.Add("Code", code);
-                ReturnJson.Add("Message", errormsg);
-                ReturnJson.Add("Result", null);
+                ReturnJson = CommFn.ErrorReturn(code, errormsg);
             }
 
             return new JsonResult(ReturnJson.ToString(Newtonsoft.Json.Formatting.Indented), this.Request);
