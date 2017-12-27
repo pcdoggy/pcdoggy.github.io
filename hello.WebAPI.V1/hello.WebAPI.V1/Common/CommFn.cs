@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 
 namespace hello.WebAPI.V1.Common
@@ -100,6 +101,35 @@ namespace hello.WebAPI.V1.Common
             return 1;
         }
 
+        /// <summary>
+        /// 根据已有类，检查参数是否完整
+        /// </summary>
+        /// <typeparam name="T">类 泛型</typeparam>
+        /// <param name="model">具体类内容</param>
+        /// <param name="data">接口入参信息</param>
+        /// <returns></returns>        
+        public static bool CheckCommand<T>(T model, JObject data)
+        {
+            bool res = true;
+            Type t = model.GetType();
+            PropertyInfo[] PropertyList = t.GetProperties();
+            foreach (PropertyInfo item in PropertyList)
+            {
+                // 类对象成员名称
+                string name = item.Name;
+
+                string userno = CommFn.GetJsonItemValue<string>(data, name);
+
+                if (string.IsNullOrEmpty(userno) || string.IsNullOrEmpty(userno.Trim()))
+                {
+                    res = false;
+                    break;
+                }
+                item.SetValue(model, userno);
+            }
+            return res;
+        }
+
         #endregion
 
         #region JSON对象操作
@@ -119,11 +149,13 @@ namespace hello.WebAPI.V1.Common
 
         #endregion
         #region 其他
+        // 移除回车空格
         public static string RemoveEnterAndWrap(string str)
         {
             return str.Replace("\r", "").Replace("\n", "");
         }
 
+        // 校验是否可以转换成时间
         public static bool CanToDateTime(object obj)
         {
             DateTime dtimels;
@@ -135,7 +167,21 @@ namespace hello.WebAPI.V1.Common
             return DateTime.TryParse(obj.ToString(), out dtimels);
         }
 
-
+        /// <summary>
+        /// C#反射遍历对象属性
+        /// </summary>
+        /// <typeparam name="T">对象类型</typeparam>
+        /// <param name="model">对象</param>
+        public static void ForeachClassProperties<T>(T model)
+        {
+            Type t = model.GetType();
+            PropertyInfo[] PropertyList = t.GetProperties();
+            foreach (PropertyInfo item in PropertyList)
+            {
+                string name = item.Name;
+                object value = item.GetValue(model, null);
+            }
+        }
         #endregion
 
     }
