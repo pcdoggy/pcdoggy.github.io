@@ -1,0 +1,6 @@
+*.pdb
+hello.WebAPI.V1/hello.WebAPI.V1/obj/Debug/hello.WebAPI.V1.dll
+*.cache
+*.dll
+hello.WebAPI.V1/hello.WebAPI.V1/bin/hello.WebAPI.V1.dll
+*.pdb
