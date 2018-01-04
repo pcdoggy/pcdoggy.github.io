@@ -5,17 +5,19 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { BooksComponent } from './books/books.component';
+import { BookchapsComponent } from './bookchaps/bookchaps.component';
 
 const appRoutes: Routes = [
+  { path: '', redirectTo: '/books', pathMatch: 'full' },
   { path: 'books', component: BooksComponent },
-
-  { path: '', redirectTo: '/books', pathMatch: 'full' }
+  { path: 'books/:bno', component: BookchapsComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    BooksComponent
+    BooksComponent,
+    BookchapsComponent
   ],
   imports: [
     BrowserModule,
