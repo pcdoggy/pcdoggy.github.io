@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>checkbox-demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="checkbox.css" />
+</head>
+
+<body>
+    <div class="check_box ">
+        <div class="checkbox_item ">
+            <input type="checkbox" />
+            <label class="check_label on">
+                <i class="checkbox_icon "></i>
+                <em class="checkbox_text">项目一</em>
+            </label>
+        </div>
+        <div class="checkbox_item">
+            <input type="checkbox" />
+            <label class="check_label">
+                <i class="checkbox_icon"></i>
+                <em class="checkbox_text">项目二</em>
+            </label>
+        </div>
+        <div class="checkbox_item">
+            <input type="checkbox" />
+            <label class="check_label">
+                <i class="checkbox_icon"></i>
+                <em class="checkbox_text">项目三</em>
+            </label>
+        </div>
+    </div>
+    <script src="../src/jquery-1.11.0.js"></script>
+    <script src="checkbox.js"></script>
+    <script type="text/javascript">
+        $(".check_label").checkbox();
+    </script>
+</body>
+
+</html>
