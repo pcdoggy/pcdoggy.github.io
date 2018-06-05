@@ -1,0 +1,24 @@
+<p>My current hero is {{currentHero.name}}</p>
+
+<h3>
+    {{title}}
+    <img src="{{heroImageUrl}}" style="height:30px">
+</h3>
+
+<!-- "The sum of 1 + 1 is 2" -->
+<p>The sum of 1 + 1 is {{1 + 1}}</p>
+
+<!-- "The sum of 1 + 1 is not 4" -->
+<p>The sum of 1 + 1 is not {{1 + 1 + getVal()}}</p>
+
+{{title}}
+<span [hidden]="isUnchanged">changed</span>
+
+<div *ngFor="let hero of heroes">{{hero.name}}</div>
+<input #heroInput> {{heroInput.value}}
+
+<button (click)="deleteHero()">Delete hero</button>
+
+<button (click)="onSave($event)">Save</button>
+<button *ngFor="let hero of heroes" (click)="deleteHero(hero)">{{hero.name}}</button>
+<form #heroForm (ngSubmit)="onSubmit(heroForm)"> ... </form>
