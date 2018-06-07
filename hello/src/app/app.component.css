@@ -1,0 +1,83 @@
+/* 页面头部内容 */
+
+.app-header,
+.app-search,
+.app-content,
+.app-footer,
+.app-menu {
+    padding: 3px;
+    background-color: #fff;
+    clear: both;
+}
+
+.app-header,
+.app-menu {
+    text-align: center;
+    line-height: 2.5em;
+}
+
+.app-search,
+.app-content,
+.app-footer {
+    line-height: 1.25em;
+}
+
+.app-search {
+    border-bottom: 1px solid #ccc;
+}
+
+ul,
+.searchitem,
+dl {
+    clear: both;
+    overflow: hidden;
+}
+
+ul>li,
+.searchitem>.leftitem,
+.searchitem>.rightitem,
+dl>dt,
+dl>dd {
+    float: left;
+}
+
+
+/* 查询条件模块 */
+
+.searchitem>.rightitem {
+    margin-left: 5px;
+}
+
+
+/* 详情内容展示模块 */
+
+dl>dt {
+    clear: left;
+}
+
+dl>dt,
+dl>dd {
+    margin-bottom: 5px;
+}
+
+
+/* 顶部开发者信息相关内容 */
+
+.app-footer {
+    text-align: right;
+}
+
+
+/* 底部导航栏相关内容 */
+
+.app-menu {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    margin-top: 2.5em;
+}
+
+ul.ulnav>li {
+    width: 33.33%;
+}
