@@ -1,0 +1,23 @@
+
+ul,
+dl {
+    clear: both;
+    overflow: hidden;
+}
+
+dl>dt,
+dl>dd {
+    float: left;
+}
+
+
+/* 详情内容展示模块 */
+
+dl>dt {
+    clear: left;
+}
+
+dl>dt,
+dl>dd {
+    margin-bottom: 5px;
+}

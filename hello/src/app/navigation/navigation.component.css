@@ -1,0 +1,22 @@
+ul>li {
+    float: left;
+}
+
+ul.ulnav>li {
+    width: 33.33%;
+}
+
+ul.ulnav>li:nth-child(n+2) {
+    border-left: 1px solid #666;
+}
+
+li>a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+}
+
+li>a>span {
+    display: block;
+}

@@ -1,0 +1,13 @@
+<ul>
+  <li *ngFor="let book of books">
+    <div>{{book.bcover}}</div>
+    <div>
+      <title>{{book.btitle}}</title>
+      <p>{{book.briefintro}}</p>
+      <dl>
+        <dt>{{book.btypename}}</dt>
+        <dd>{{book.bstatusname}}</dd>
+      </dl>
+    </div>
+  </li>
+</ul>

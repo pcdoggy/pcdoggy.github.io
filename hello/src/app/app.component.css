@@ -1,4 +1,4 @@
-/* 页面头部内容 */
+/* 页面头部内容、查询条件、书籍列表、底部开发者信息、导航栏*/
 
 .app-header,
 .app-search,
@@ -10,8 +10,7 @@
     clear: both;
 }
 
-.app-header,
-.app-menu {
+.app-header {
     text-align: center;
     line-height: 2.5em;
 }
@@ -26,47 +25,12 @@
     border-bottom: 1px solid #ccc;
 }
 
-ul,
-.searchitem,
-dl {
-    clear: both;
-    overflow: hidden;
-}
-
-ul>li,
-.searchitem>.leftitem,
-.searchitem>.rightitem,
-dl>dt,
-dl>dd {
-    float: left;
-}
-
-
-/* 查询条件模块 */
-
-.searchitem>.rightitem {
-    margin-left: 5px;
-}
-
-
-/* 详情内容展示模块 */
-
-dl>dt {
-    clear: left;
-}
-
-dl>dt,
-dl>dd {
-    margin-bottom: 5px;
-}
-
-
 /* 顶部开发者信息相关内容 */
 
 .app-footer {
     text-align: right;
+    margin-bottom: 55px;
 }
-
 
 /* 底部导航栏相关内容 */
 
@@ -76,8 +40,26 @@ dl>dd {
     bottom: 0;
     left: 0;
     margin-top: 2.5em;
+    height: 55px;
+    text-align: center;
+    line-height: 1.25em;
 }
 
-ul.ulnav>li {
-    width: 33.33%;
+/* 返回顶部按钮 */
+
+.divanchor {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 30px;
+    height: 30px;
+    display: none;
+}
+
+.divanchor>a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-image: url(../assets/top.png);
+    background-size: cover;
 }

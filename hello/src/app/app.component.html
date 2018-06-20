@@ -7,46 +7,12 @@
 <hr>
 <section class="app-search">
     <!-- 搜索条件区 -->
-    <div class="searchitem">
-        <div class="leftitem">分类</div>
-        <div class="rightitem">
-            <ul>
-                <li>全部</li>
-            </ul>
-        </div>
-    </div>
-    <div class="searchitem">
-        <div class="leftitem">状态</div>
-        <div class="rightitem">
-            <ul>
-                <li>全部</li>
-            </ul>
-        </div>
-    </div>
+    <app-booksearch></app-booksearch>
 </section>
 
 <div class="app-content">
     <!-- 内容展示区 -->
-    <dl>
-        <dt>logo</dt>
-        <dd>
-            <title>书名</title>
-            <p>书籍简介</p>
-            <dl>
-                <dt>分类</dt>
-                <dd>更新中</dd>
-            </dl>
-        </dd>
-        <dt>logo</dt>
-        <dd>
-            <title>书名</title>
-            <p>书籍简介</p>
-            <dl>
-                <dt>分类</dt>
-                <dd>完结</dd>
-            </dl>
-        </dd>
-    </dl>
+    <app-books></app-books>
 </div>
 <footer class="app-footer">
     <!-- 底部开发者展示区 -->
@@ -55,15 +21,8 @@
 <hr>
 <nav class="app-menu">
     <!-- 导航区 -->
-    <ul class="ulnav">
-        <li>
-            <i></i> 书架
-        </li>
-        <li>
-            <i></i> 书库
-        </li>
-        <li>
-            <i></i> 个人中心
-        </li>
-    </ul>
+    <app-navigation></app-navigation>
 </nav>
+<div class="divanchor">
+    <a></a>
+</div>
