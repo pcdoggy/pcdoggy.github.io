@@ -111,6 +111,7 @@ CREATE TABLE ebs_book (
   btype varchar(6) NOT NULL,
   bstatus varchar(6) NOT NULL,
   chapcount int NOT NULL,
+  bcover nvarchar(300) NOT NULL,
   insuser varchar(20) NOT NULL,
   instime datetime NOT NULL,
   upduser varchar(20) NOT NULL,
