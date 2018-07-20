@@ -1,0 +1,81 @@
+/* 清除内外边距 */
+
+html {
+	font-size: 12px;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+p,
+blockquote,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+pre,
+fieldset,
+lengend,
+button,
+input,
+textarea,
+th,
+td {
+	/* structural elements 结构元素 */
+	/* list elements 列表元素 */
+	/* text formatting elements 文本格式元素 */
+	/* form elements 表单元素 */
+	/* table elements 表格元素 */
+	margin: 0;
+	padding: 0;
+	font: 12px/1 Tahoma, Helvetica, Arial, ”\5b8b\4f53″, sans-serif;
+}
+
+address,
+cite,
+dfn,
+em,
+var {
+	/* 将斜体扶正 */
+	font-style: normal;
+}
+
+code,
+kbd,
+pre,
+samp,
+tt {
+	font-family: "Courier New", Courier, monospace;
+}
+
+small {
+	/* 统一等宽字体 */
+	/* 小于 12px 的中文很难阅读，让 small 正常化 */
+	font-size: 12px;
+}
+
+ul,
+ol {
+	/* 重置列表元素 */
+	list-style: none;
+}
+
+a {
+	/* 重置文本格式元素 */
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+body {
+	width: :100%;
+}

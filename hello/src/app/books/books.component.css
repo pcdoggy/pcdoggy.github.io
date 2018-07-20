@@ -1,4 +1,3 @@
-
 ul,
 dl {
     clear: both;
@@ -10,7 +9,6 @@ dl>dd {
     float: left;
 }
 
-
 /* 详情内容展示模块 */
 
 dl>dt {
@@ -20,4 +18,9 @@ dl>dt {
 dl>dt,
 dl>dd {
     margin-bottom: 5px;
+}
+
+.books-search {
+    line-height: 1.25em;
+    border-bottom: 1px solid #ccc;
 }

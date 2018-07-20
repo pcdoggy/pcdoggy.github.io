@@ -1,13 +1,19 @@
-<ul>
-  <li *ngFor="let book of books">
-    <div>{{book.bcover}}</div>
-    <div>
-      <title>{{book.btitle}}</title>
-      <p>{{book.briefintro}}</p>
-      <dl>
-        <dt>{{book.btypename}}</dt>
-        <dd>{{book.bstatusname}}</dd>
-      </dl>
-    </div>
-  </li>
-</ul>
+<section class="books-search">
+  <!-- 搜索条件区 -->
+  <app-booksearch></app-booksearch>
+</section>
+<section class="books-list">
+  <ul>
+    <li *ngFor="let book of books">
+      <div>{{book.bcover}}</div>
+      <div>
+        <title>{{book.btitle}}</title>
+        <p>{{book.briefintro}}</p>
+        <dl>
+          <dt>{{book.btypename}}</dt>
+          <dd>{{book.bstatusname}}</dd>
+        </dl>
+      </div>
+    </li>
+  </ul>
+</section>
