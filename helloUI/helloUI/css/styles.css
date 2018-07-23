@@ -1,7 +1,10 @@
 /* 清除内外边距 */
 
 html {
-	font-size: 12px;
+	font-size: 16px;
+}
+body{
+	background-color: #efefef;
 }
 
 body,

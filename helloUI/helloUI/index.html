@@ -13,17 +13,17 @@
 				//console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。"
 
 			});
-			
-			var width = document.documentElement.clientWidth; //获取屏幕的宽度
-			var height = document.documentElement.clientHeight; //获取屏幕的高度
-			var bili1 = width / 750; //屏幕宽度与设计稿宽度的比例（750是设计稿的宽度）
-			var bili2 = height / (1336 - 48); //屏幕高度与设计稿高度的比例(1336是设计稿的高度，其中48是设计稿中含有手机顶部的状态栏，需要去掉，1366-48才是真正需要显示的东西)
-			var bili = bili1 < bili2 ? bili1 : bili2; //宽度的比例和高度的比例进行比较，取值最小的
-			var html = document.querySelector('html'); //选择html节点
-			var rem = 16; //手动设置rem与px的比例；
-			html.style.fontSize = rem + "px"; //设置html的默认fontsize为16px。(注意，浏览器中最小值为12px，)
-			var __bili = bili / rem; //将比例和rem进行联系。
-			document.documentElement.style.setProperty('--bili', __bili + "rem"); //设置css中的变量为--bili，值为__bili
+
+//			var width = document.documentElement.clientWidth; //获取屏幕的宽度
+//			var height = document.documentElement.clientHeight; //获取屏幕的高度
+//			var bili1 = width / 750; //屏幕宽度与设计稿宽度的比例（750是设计稿的宽度）
+//			var bili2 = height / (1336 - 48); //屏幕高度与设计稿高度的比例(1336是设计稿的高度，其中48是设计稿中含有手机顶部的状态栏，需要去掉，1366-48才是真正需要显示的东西)
+//			var bili = bili1 < bili2 ? bili1 : bili2; //宽度的比例和高度的比例进行比较，取值最小的
+//			var html = document.querySelector('html'); //选择html节点
+//			var rem = 16; //手动设置rem与px的比例；
+//			html.style.fontSize = rem + "px"; //设置html的默认fontsize为16px。(注意，浏览器中最小值为12px，)
+//			var __bili = bili / rem; //将比例和rem进行联系。
+//			document.documentElement.style.setProperty('--bili', __bili + "rem"); //设置css中的变量为--bili，值为__bili
 		</script>
 	</head>
 
@@ -47,13 +47,13 @@
 					<div class="leftitem">分类</div>
 					<div class="rightitem">
 						<ul>
-							<li class="active">全部</li>
+							<li>全部</li>
 							<li>a</li>
 							<li>ab</li>
 							<li>abc</li>
 							<li>abcd</li>
 							<li>abcde</li>
-							<li>abcdef</li>
+							<li class="active">abcdef</li>
 							<li>abcdefg</li>
 						</ul>
 					</div>
@@ -75,7 +75,32 @@
 				</div>
 			</section>
 			<section class="app-content">
-
+				<div class="contentitem">
+					<div class="leftitem">
+						<img src="img/noimg.png" alt="书名" title="书名" name="书名" />
+					</div>
+					<div class="rightitem">
+						<h4>书名1</h4>
+						<p>书籍简介书籍简介书籍简介书籍简介书籍简介书籍简介书籍简介书籍简介书籍简介书籍简介书籍简介书籍简介书籍简介书籍简介书籍简介书籍简介书籍简介书籍简介书籍简介书籍简介书籍简介书籍简介书籍简介书籍简介</p>
+						<div>
+							<span>分类</span>
+							<span>更新中</span>
+						</div>
+					</div>
+				</div>
+				<div class="contentitem">
+					<div class="leftitem">
+						<img src="img/noimg.png" alt="书名" title="书名" name="书名" />
+					</div>
+					<div class="rightitem">
+						<h4>书名2</h4>
+						<p>书籍简介</p>
+						<div>
+							<span>分类</span>
+							<span>完结</span>
+						</div>
+					</div>
+				</div>
 			</section>
 		</div>
 		<footer class="app-footer">

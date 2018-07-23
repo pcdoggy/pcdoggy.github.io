@@ -1,133 +1,224 @@
-:root{
-	--top-bottom-height:3.75rem;
-	--pad-top:0.25rem;
-	--content-height:1.25rem;
+:root {
+	--top-bottom-height: 3.75rem;
+	--pad-top: 0.25rem;
+	--search-height: 1.25rem;
+	--content-height: 4rem;
 }
-.app-header,.app-main,.app-search,.app-content,.app-footer,.app-menu{
+
+.app-header,
+.app-main,
+.app-footer,
+.app-menu {
 	width: 100%;
 	clear: both;
 }
-.app-search ul,.app-footer ul{
+
+.app-search ul,
+.app-footer ul {
 	overflow: hidden;
 }
-.app-search ul li,.app-footer ul li{
+
+.app-search ul li,
+.app-footer ul li {
 	float: left;
 	border: none;
 }
 
+
 /******app-header-begin******/
-.app-header{
+
+.app-header {
 	border-bottom: 1px solid #CCCCCC;
+	background-color: #fefefe;
 }
 
-.app-header ul{
+.app-header ul {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
-.app-header ul li{	
+
+.app-header ul li {
 	height: calc(var(--top-bottom-height));
 	line-height: calc(var(--top-bottom-height));
 	text-align: center;
 }
-.app-header ul li > a{	
+
+.app-header ul li>a {
 	display: block;
 	height: inherit;
 	line-height: inherit;
 	width: 100%;
 	/*color: #;*/
 }
-.app-header ul li > h3{	
+
+.app-header ul li>h3 {
 	width: 100%;
 	height: inherit;
 	line-height: inherit;
 }
-.app-header ul li.abtn{
+
+.app-header ul li.abtn {
 	width: calc(var(--top-bottom-height));
 }
-.app-header ul li.htitle{
+
+.app-header ul li.htitle {
 	/*width: -webkit-calc(100% - (var(--header-height) * 2)));
 	width: -moz-calc(100% - (var(--header-height) * 2)));
 	width: calc(100% - (var(--header-height) * 2)));*/
 }
+
+
 /******app-header-end******/
 
 
 /******app-menu-begin******/
-.app-menu{
+
+.app-menu {
 	position: fixed;
 	bottom: 0;
 	border-top: 1px solid #CCCCCC;
 	padding-top: calc(var(--pad-top));
+	background-color: #fefefe;
 }
 
-.app-menu ul{
+.app-menu ul {
 	display: flex;
 	/*flex-direction: column;*/
 	align-items: center;
 	justify-content: space-around;
 }
-.app-menu ul li{	
+
+.app-menu ul li {
 	height: calc(var(--top-bottom-height));
 	line-height: calc(var(--top-bottom-height));
 	text-align: center;
 	direction: left;
 }
-.app-menu ul li > a{	
+
+.app-menu ul li>a {
 	display: block;
 	height: inherit;
 	width: 100%;
 	/*color: #;*/
 }
 
-.app-menu ul li > a>i,.app-menu ul li > a>span{	
+.app-menu ul li>a>i,
+.app-menu ul li>a>span {
 	display: block;
 	line-height: calc(var(--top-bottom-height) / 2);
 	width: 100%;
 	/*color: #;*/
 }
+
+
 /******app-menu-end******/
 
+
 /******app-footer-begin******/
-.app-footer{
+
+.app-footer {
 	padding-top: calc(var(--pad-top));
 	padding-bottom: calc(var(--top-bottom-height));
 	text-align: right;
 }
+
+
 /******app-footer-end******/
 
+
 /******app-main-begin******/
-.app-main{
+
+.app-main {
 	padding-top: calc(var(--pad-top));
 	border-bottom: 1px solid #CCCCCC;
 }
-.app-main>.app-search{
+
+.app-main>.app-search,
+.app-main>.app-content {
 	width: 100%;
 }
-.app-search>.searchitem{
+
+.app-search>.searchitem {
 	display: flex;
+	padding-bottom: 2px;
+	background-color: #fefefe;
 }
-.app-search>.searchitem>.leftitem{
-	width: calc(var(--content-height) * 2.5);
+
+.app-search>.searchitem:first-child {
+	padding-top: 2px;
+}
+
+.app-search>.searchitem:last-child {
+	border-bottom: 1px solid #CCCCCC;
+}
+
+.app-search>.searchitem>.leftitem {
+	width: calc(var(--search-height) * 2.5);
 	padding: calc(var(--pad-top));
-	height: calc(var(--content-height));
-	line-height: calc(var(--content-height));
+	height: calc(var(--search-height));
+	line-height: calc(var(--search-height));
 }
-.app-search>.searchitem>.rightitem ul{
+
+.app-search>.searchitem>.rightitem ul {
 	overflow: hidden;
 }
-.app-search>.searchitem>.rightitem ul>li{
+
+.app-search>.searchitem>.rightitem ul>li {
 	padding: calc(var(--pad-top));
-	height: calc(var(--content-height));
-	line-height: calc(var(--content-height));
+	height: calc(var(--search-height));
+	line-height: calc(var(--search-height));
 	cursor: pointer;
-	min-width: calc(var(--content-height) * 2);
+	min-width: calc(var(--search-height) * 2);
 	text-align: center;
 }
-.app-search>.searchitem>.rightitem ul>li.active{
+
+.app-search>.searchitem>.rightitem ul>li.active {
 	background-color: #aaa;
 	color: #fff;
 	border-radius: 3px;
 }
+
+.app-content>.contentitem {
+	display: flex;
+	margin-bottom: 5px;
+	background-color: #fefefe;
+}
+
+.app-content>.contentitem:first-child {
+	margin-top: 5px;
+}
+
+.app-content>.contentitem>.leftitem {
+	width: calc(var(--content-height));
+	padding: calc(var(--pad-top));
+	height: calc(var(--content-height));
+	line-height: calc(var(--content-height));
+}
+
+.app-content>.contentitem>.leftitem>img {
+	width: 100%;
+	height: 100%;
+}
+
+.app-content>.contentitem>.rightitem {
+	padding: calc(var(--pad-top));
+	height: calc(var(--content-height));
+	width: calc(100% - var(--content-height));
+}
+
+.app-content>.contentitem>.rightitem>h4,
+.app-content>.contentitem>.rightitem>p,
+.app-content>.contentitem>.rightitem>div {
+	line-height: calc(var(--content-height) / 3);
+	width: 98%;
+}
+
+.app-content>.contentitem>.rightitem>p {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
 
 /******app-main-end******/
