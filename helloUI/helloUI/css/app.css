@@ -90,6 +90,7 @@
 
 /******app-footer-begin******/
 .app-footer{
+	padding-top: calc(var(--pad-top));
 	padding-bottom: calc(var(--top-bottom-height));
 	text-align: right;
 }
@@ -98,6 +99,7 @@
 /******app-main-begin******/
 .app-main{
 	padding-top: calc(var(--pad-top));
+	border-bottom: 1px solid #CCCCCC;
 }
 .app-main>.app-search{
 	width: 100%;
@@ -106,7 +108,7 @@
 	display: flex;
 }
 .app-search>.searchitem>.leftitem{
-	width: calc(var(--content-height) * 3);
+	width: calc(var(--content-height) * 2.5);
 	padding: calc(var(--pad-top));
 	height: calc(var(--content-height));
 	line-height: calc(var(--content-height));
@@ -118,5 +120,14 @@
 	padding: calc(var(--pad-top));
 	height: calc(var(--content-height));
 	line-height: calc(var(--content-height));
+	cursor: pointer;
+	min-width: calc(var(--content-height) * 2);
+	text-align: center;
 }
+.app-search>.searchitem>.rightitem ul>li.active{
+	background-color: #aaa;
+	color: #fff;
+	border-radius: 3px;
+}
+
 /******app-main-end******/
