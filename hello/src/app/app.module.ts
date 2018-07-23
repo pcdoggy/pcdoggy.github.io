@@ -9,6 +9,8 @@ import { BooksearchComponent } from './booksearch/booksearch.component';
 import { BookchaptersComponent } from './bookchapters/bookchapters.component';
 import { NavigationComponent } from './navigation/navigation.component';
 
+import { AppRoutingModule } from './app-routing.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +22,8 @@ import { NavigationComponent } from './navigation/navigation.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

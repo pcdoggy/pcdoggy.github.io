@@ -15,14 +15,9 @@
     line-height: 2.5em;
 }
 
-.app-search,
 .app-content,
 .app-footer {
     line-height: 1.25em;
-}
-
-.app-search {
-    border-bottom: 1px solid #ccc;
 }
 
 /* 顶部开发者信息相关内容 */
