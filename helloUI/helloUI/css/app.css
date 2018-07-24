@@ -56,6 +56,7 @@
 	width: 100%;
 	height: inherit;
 	line-height: inherit;
+	font-size: 1.25em;
 }
 
 .app-header ul li.abtn {
@@ -119,7 +120,7 @@
 
 .app-footer {
 	padding-top: calc(var(--pad-top));
-	padding-bottom: calc(var(--top-bottom-height));
+	padding-bottom: calc(var(--top-bottom-height) + var(--pad-top));
 	text-align: right;
 }
 
@@ -201,17 +202,17 @@
 	height: 100%;
 }
 
+/*宽度减时,注意减去padding值*/
 .app-content>.contentitem>.rightitem {
-	padding: calc(var(--pad-top));
+	width: calc(100% - var(--content-height) - var(--pad-top) * 4);
 	height: calc(var(--content-height));
-	width: calc(100% - var(--content-height));
+	padding: calc(var(--pad-top));
 }
 
 .app-content>.contentitem>.rightitem>h4,
 .app-content>.contentitem>.rightitem>p,
 .app-content>.contentitem>.rightitem>div {
 	line-height: calc(var(--content-height) / 3);
-	width: 98%;
 }
 
 .app-content>.contentitem>.rightitem>p {
