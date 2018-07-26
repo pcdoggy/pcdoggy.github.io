@@ -69,6 +69,10 @@
 	width: calc(100% - (var(--header-height) * 2)));*/
 }
 
+.app-header ul li.htitle a.invalid {
+	color: #ccc;
+}
+
 
 /******app-header-end******/
 
@@ -202,7 +206,9 @@
 	height: 100%;
 }
 
+
 /*宽度减时,注意减去padding值*/
+
 .app-content>.contentitem>.rightitem {
 	width: calc(100% - var(--content-height) - var(--pad-top) * 4);
 	height: calc(var(--content-height));
@@ -219,6 +225,57 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
+}
+
+.app-content>.contentgrid {
+	display: flex;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	background-color: #fefefe;
+	align-items: center;
+	align-content: flex-start;
+	flex-wrap: wrap;
+}
+
+.app-content>.contentgrid>.griditem {
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	/*宽度百分比计算,去除padding值*/
+	width: calc(30% - 12px);
+	/*margin左右值百分比计算,在父级宽度值上进行计算*/
+	margin: 5px 1.5%;
+}
+
+@media screen and (min-width:768px) {
+	.app-content>.contentgrid>.griditem {
+		width: calc(22% - 12px);
+		margin: 5px 1.5%;
+	}
+}
+
+@media screen and (min-width:1024px) {
+	.app-content>.contentgrid>.griditem {
+		width: calc(18% - 12px);
+		margin: 5px 2%;
+	}
+}
+
+.app-content>.contentgrid>.griditem>img,
+.app-content>.contentgrid>.griditem>h5,
+.app-content>.contentgrid>.griditem>p {
+	width: 94%;
+	display: block;
+	margin: 0 auto;
+}
+
+.app-content>.contentgrid>.griditem>h5 {
+	margin-top: 5px;
+	font-size: 1.1666666em;
+}
+.app-content>.contentgrid>.griditem>p {
+	margin-top: 3px;
 }
 
 

@@ -3,7 +3,8 @@
 html {
 	font-size: 16px;
 }
-body{
+
+body {
 	background-color: #efefef;
 }
 
@@ -39,6 +40,7 @@ td {
 	margin: 0;
 	padding: 0;
 	font: 12px/1 Tahoma, Helvetica, Arial, ”\5b8b\4f53″, sans-serif;
+	color: #666;
 }
 
 address,
@@ -73,10 +75,27 @@ ol {
 a {
 	/* 重置文本格式元素 */
 	text-decoration: none;
+	color: #0FACF3;
 }
 
 a:hover {
 	text-decoration: none;
+	color: #0FACF3;
+}
+
+a:active {
+	text-decoration: none;
+	color: #0FACF3;
+}
+
+a:link {
+	text-decoration: none;
+	color: #0FACF3;
+}
+
+a:visited {
+	text-decoration: none;
+	color: #0FACF3;
 }
 
 body {
