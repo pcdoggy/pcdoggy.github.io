@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>AnimationWithD3-WhiteBlackBlocks-转-每日一练</title>
+		<style type="text/css">
+			body {
+				margin: 0;
+				height: 100vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background-color: black;
+			}
+			
+			.circles {
+				width: 60vmin;
+				height: 60vmin;
+				position: relative;
+				--particles: 3;
+				animation: zoom 5s linear infinite;
+			}
+			
+			.circles span {
+				position: absolute;
+				box-sizing: border-box;
+				width: 50%;
+				height: 50%;
+				background-color: white;
+				border-radius: 50%;
+				left: 25%;
+				transform-origin: bottom center;
+				--deg: calc(360deg / var(--particles) * (var(--n) - 1));
+				transform: rotate(var(--deg));
+				animation: rotating 5s ease-in-out infinite;
+				mix-blend-mode: difference;
+			}
+			
+			.circles span:nth-child(1) {
+				--n: 1;
+			}
+			
+			.circles span:nth-child(2) {
+				--n: 2;
+			}
+			
+			.circles span:nth-child(3) {
+				--n: 3;
+			}
+			
+			@keyframes rotating {
+				0% {
+					transform: rotate(0);
+				}
+				50% {
+					transform: rotate(var(--deg)) translateY(0);
+				}
+				100% {
+					transform: rotate(var(--deg)) translateY(100%) scale(2);
+				}
+			}
+			
+			@keyframes zoom {
+				to {
+					transform: scale(0.5) translateY(-50%);
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="circles">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</body>
+	<script src="src/d3.v5.min.js"></script>
+	<script type="text/javascript">
+		const COUNT_OF_PARTICLES = 30;
+
+		d3.select('.circles')
+			.style('--particles', COUNT_OF_PARTICLES)
+			.selectAll('span')
+			.data(d3.range(COUNT_OF_PARTICLES))
+			.enter()
+			.append('span').style('--n', (d) => d + 1);
+	</script>
+
+</html>
