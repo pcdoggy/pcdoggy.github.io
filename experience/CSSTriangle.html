@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>CSS-Triangle-转-每日一练</title>
+		<style type="text/css">
+			body {
+				background: #e5e5e5;
+			}
+			
+			.triangleContainer {
+				margin: 50px auto;
+				width: 500px;
+				height: 400px;
+				background: #fff;
+			}
+			
+			.triangleContent {
+				position: relative;
+			}
+			
+			.triangle {
+				position: absolute;
+				right: -70px;
+				top: -70px;
+				transform: rotate(45deg);
+				/* 比较长的写法 */
+				/*border-top: 70px solid transparent;*/
+				/*border-bottom: 70px solid red;*/
+				/*border-left: 70px solid transparent;*/
+				/*border-right: 70px solid transparent;*/
+				/* 简单写法 */
+				border: 70px solid transparent;
+				border-bottom-color: red;
+			}
+			
+			.title {
+				position: absolute;
+				right: 8px;
+				top: 17px;
+				transform: rotate(45deg);
+				font-size: 19px;
+				color: #fff;
+			}
+			
+			.promptInfo {
+				position: absolute;
+				left: 5%;
+				top: -28px;
+				margin: 0 auto;
+				padding: 20px 0;
+				box-sizing: border-box;
+				width: 88%;
+				border-radius: 10px;
+				z-index: 999;
+				background: #fff;
+				box-shadow: 3px 3px 3px rgba(0, 0, 0, .2);
+				border: 0;
+				font-size: 30px;
+			}
+			/* 添加与阴影颜色相同来形成三角形的阴影效果 */
+			
+			.promptInfo::before {
+				position: absolute;
+				bottom: -21px;
+				right: 110px;
+				z-index: 999;
+				border-top: 20px solid rgba(0, 0, 0, .2);
+				border-left: 20px solid transparent;
+				border-right: 20px solid transparent;
+				content: ""
+			}
+			
+			.promptInfo::after {
+				position: absolute;
+				bottom: -17px;
+				right: 110px;
+				z-index: 999;
+				border-top: 20px solid #fff;
+				border-left: 20px solid transparent;
+				border-right: 20px solid transparent;
+				content: ""
+			}
+			
+			.promptInfo .inviteMessage {
+				padding-left: 30px;
+			}
+			
+			.promptInfo .clickMessage {
+				display: inline-block;
+				margin-left: 15px;
+				padding: 10px 20px;
+				color: #fff;
+				background: red;
+				border-radius: 30px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="triangleContainer">
+			<div class="triangleContent">
+				<div class="triangle"></div>
+				<div class="title">想你呦</div>
+			</div>
+		</div>
+		<div style="position: relative;">
+			<view class="promptInfo">
+				<text class="inviteMessage">邀请越多的好友，中奖几率越高哦！</text>
+				<text class="clickMessage">我知道了</text>
+			</view>
+		</div>
+	</body>
+
+</html>
