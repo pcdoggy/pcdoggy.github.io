@@ -140,7 +140,8 @@
 }
 
 .app-main>.app-search,
-.app-main>.app-content {
+.app-main>.app-content,
+.app-main>.app-page {
 	width: 100%;
 }
 
@@ -278,5 +279,20 @@
 	margin-top: 3px;
 }
 
+
+.app-content>.contentdetail {
+	padding-bottom: 8px;
+	padding-top: 8px;
+	background-color: #fefefe;
+}
+.app-page{
+	padding-bottom: 5px;
+	padding-top: 5px;
+	background-color: #fefefe;
+	display: flex;
+	align-items: center;
+	align-content: flex-start;
+	flex-wrap: wrap;
+}
 
 /******app-main-end******/
