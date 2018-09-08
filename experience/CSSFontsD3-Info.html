@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS Fonts Online and D3-Info-转-每日一练</title>
+    <style type="text/css">
+        @import url("https://fonts.googleapis.com/css?family=Product+Sans");
+        :root {
+            --blue: #4285f4;
+            --red: #ea4335;
+            --yellow: #fbbc05;
+            --green: #34a853;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'product sans';
+        }
+
+        .logo {
+            margin-top: -10vh;
+            text-align: center;
+        }
+
+        .logo::before {
+            content: 'google_logo';
+            font-size: 10vw;
+
+            background-image: linear-gradient( to right,
+            var(--blue) 0%, var(--blue) 26.5%,
+            var(--red) 26.5%, var(--red) 43.5%,
+            var(--yellow) 43.5%, var(--yellow) 61.5%,
+            var(--blue) 61.5%, var(--blue) 78.5%,
+            var(--green) 78.5%, var(--green) 84.5%,
+            var(--red) 84.5%, var(--red) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .desc {
+            font-size: 1.5vw;
+            font-weight: normal;
+            color: dimgray;
+            margin-top: 2em;
+        }
+
+        .zeros {
+            font-size: 3vw;
+            font-weight: bold;
+            margin-top: 0.2em;
+            text-align: center;
+            width: 25.5em;
+            word-wrap: break-word;
+        }
+
+        .zeros span {
+            color: var(--c);
+        }
+
+        .zeros span:nth-child(1) {
+            margin-right: 0.2em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="logo">
+        <p class="desc">The name of Google originated from a misspelling of the word "googol", the number 1 followed by 100
+            zeros.
+        </p>
+        <div class="zeros">
+            <!-- <span style="--c:var(--blue);">1</span>
+        <span style="--c:var(--red);">0</span>
+        <span style="--c:var(--yellow);">0</span>
+        <span style="--c:var(--blue);">0</span>
+        <span style="--c:var(--green);">0</span> -->
+        </div>
+    </div>
+    <script type="text/javascript" src="src/d3.v5.min.js"></script>
+    <script type="text/javascript">
+        function getColor(excludedColor) {
+            let colors = new Set(['blue', 'red', 'yellow', 'green'])
+            colors.delete(excludedColor)
+            return Array.from(colors)[Math.floor(d3.randomUniform(0, colors.size)())]
+        }
+        const ZEROS = d3.range(100).map(x => 0)
+        const ONE = { number: 1, color: 'blue' }
+        let numbers = ZEROS.reduce(function (numberObjects, d) {
+            numberObjects.push({
+                number: d,
+                color: getColor(numberObjects[numberObjects.length - 1].color)
+            })
+            return numberObjects
+        }, [ONE])
+        d3.select('.zeros')
+            .selectAll('span')
+            .data(numbers)
+            .enter()
+            .append('span')
+            .style('--c', (d) => `var(--${d.color})`)
+            .text((d) => d.number)
+    </script>
+</body>
+
+</html>
