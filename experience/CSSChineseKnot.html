@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS Chinese Knot-转-每日一练</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .knot {
+            box-sizing: border-box;
+            font-size: 100px;
+            width: 2em;
+            height: 1.6em;
+            background: skyblue;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .box {
+            position: absolute;
+            box-sizing: border-box;
+            width: 1em;
+            height: 0.4em;
+            border: var(--b) solid firebrick;
+            --b: 0.1em;
+        }
+
+        .knot .box:nth-child(1) {
+            transform: rotate(45deg) translate(-15%, -38%);
+            border-radius: 20% 0% 0% 20% / 50% 0 0 50%;
+        }
+
+        .knot .box:nth-child(2) {
+            transform: rotate(45deg) translate(15%, 37%);
+            border-radius: 0% 20% 20% 0% / 0% 50% 50% 0%;
+        }
+
+        .knot .box:nth-child(3) {
+            transform: rotate(-45deg) translate(15%, -38%);
+            border-radius: 0% 20% 20% 0% / 0% 50% 50% 0%;
+        }
+
+        .knot .box:nth-child(4) {
+            transform: rotate(-45deg) translate(-15%, 37%);
+            border-radius: 20% 0% 0% 20% / 50% 0 0 50%;
+        }
+
+        .knot .box:nth-child(1)::after {
+            box-sizing: border-box;
+            content: '';
+            position: absolute;
+            width: 0.4em;
+            height: 0.4em;
+            border: var(--b) solid firebrick;
+            border-radius: 50% 50% 50% 0%;
+            top: -0.4em;
+            right: -0.4em;
+        }
+
+        .knot .box:nth-child(2)::after {
+            box-sizing: border-box;
+            content: '';
+            position: absolute;
+            width: 0.4em;
+            height: 0.4em;
+            border: var(--b) solid firebrick;
+            border-radius: 50% 0% 50% 50%;
+            top: 0.2em;
+            right: 0.8em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="knot">
+        <span class="box"></span>
+        <span class="box"></span>
+        <span class="box"></span>
+        <span class="box"></span>
+    </div>
+</body>
+
+</html>
