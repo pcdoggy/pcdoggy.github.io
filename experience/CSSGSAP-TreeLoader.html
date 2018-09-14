@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS GSAP Tree Loader-Daily exercise-转</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: black;
+        }
+
+        .sapling {
+            position: relative;
+            width: 5em;
+            height: 17.5em;
+            font-size: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .branch {
+            position: absolute;
+            width: 0.2em;
+            height: inherit;
+            border-radius: 25%;
+            background: burlywood;
+        }
+
+        .leaves {
+            position: absolute;
+            width: inherit;
+            height: 15em;
+            top: 1em;
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+        .leaves span {
+            width: 2.5em;
+            height: 2.5em;
+            background-color: limegreen;
+        }
+
+        .leaves span:nth-child(odd) {
+            border-bottom-left-radius: 3em;
+            border-top-right-radius: 3em;
+            transform-origin: right bottom;
+            align-self: flex-start;
+        }
+
+        .leaves span:nth-child(even) {
+            border-bottom-right-radius: 3em;
+            border-top-left-radius: 3em;
+            transform-origin: left bottom;
+            align-self: flex-end;
+        }
+    </style>
+</head>
+
+<body>
+    <figure class="sapling">
+        <div class="branch"></div>
+        <div class="leaves">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
+    <script type="text/javascript">
+        let animation = new TimelineMax({
+            repeat: -1,
+            repeatDelay: 0.5
+        });
+        animation.from('.branch', 4, {
+                scaleY: 0,
+                ease: Power1.easeOut
+            }, 'branch')
+            .staggerFrom('.leaves span', 0.5, {
+                scale: 0,
+                ease: Power1.easeOut
+            }, 0.5, 0.5, 'branch')
+            .to(['.branch', '.leaves span'], 3, {
+                backgroundColor: 'yellow'
+            })
+            .to(['.branch', '.leaves span'], 1, {
+                autoAlpha: 0
+            });
+    </script>
+</body>
+
+</html>
