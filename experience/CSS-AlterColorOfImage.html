@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS - Alter Color of Image - Daily exercise - 转</title>
+    <style>
+        /* 转：https://juejin.im/post/5ba21d78f265da0af0337fe3 */
+
+        body {
+            overflow-x: hidden;
+        }
+
+        img {
+            width: 48%;
+            margin: 0 auto;
+        }
+
+        ul li {
+            list-style: none;
+        }
+
+        .ulimges {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .ulimges>* {
+            width: 32%;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            padding: 5px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>利用CSS改变图片颜色</h1>
+    <ul>
+        <li>
+            <h2>filter</h2>
+            <p>CSS滤镜（filter）属提供的图形特效，像模糊，锐化或元素变色。过滤器通常被用于调整图片，背景和边界的渲染。</p>
+            <p>CSS标准里包含了一些已实现预定义效果的函数。</p>
+            <code>
+                filter: none
+                | blur()
+                | brightness()
+                | contrast()
+                | drop-shadow()
+                | grayscale()
+                | hue-rotate()
+                | invert()
+                | opacity()
+                | saturate()
+                | sepia()
+                | url();
+
+            </code>
+            <ul class="ulimges">
+                <li>
+                    <h3>filter: none</h3>
+                    <p>没有任何效果，默认filter就为none</p>
+                    <p>
+                        <img src="img/Original" alt="原图">
+                    </p>
+                </li>
+                <li>
+                    <h3>filter:blur( ) 高斯模糊</h3>
+                    <p>给图像一个高斯模糊效果，length值越大，图像越模糊</p>
+                    <code>
+                        img {
+                        filter:blur(2px);
+                        }
+                    </code>
+                    <p>
+                        <img src="img/Original" alt="高斯模糊" style="filter:blur(2px);">
+                    </p>
+                </li>
+                <li>
+                    <h3>brightness(%) 线性乘法</h3>
+                    <p>可以让图片看起来更亮或者更暗</p>
+                    <code>
+                        img {
+                        filter:brightness(70%);
+                        }
+                    </code>
+                    <p>
+                        <img src="img/Original" alt="线性乘法" style="filter:brightness(70%);">
+                    </p>
+                </li>
+                <li>
+                    <h3>contrast(%) 对比度</h3>
+                    <p>调整图像的对比度。</p>
+                    <code>
+                        img {
+                        filter:contrast(50%);
+                        }
+                    </code>
+                    <p>
+                        <img src="img/Original" alt="对比度" style="filter:contrast(50%);">
+                    </p>
+                </li>
+                <li>
+                    <h3>drop-shadow(h-shadow v-shadow blur spread color)</h3>
+                    <p>
+                        <code>
+                            给图像设置一个阴影效果。阴影是合成在图像下面，可以有模糊度的，可以以特定颜色画出的遮罩图的偏移版本。 函数接受<shadow>(在CSS3背景中定义)类型的值，除了"inset"关键字是不允许的。该函数与已有的box-shadow
+                                box-shadow属性很相似；不同之处在于，通过滤镜，一些浏览器为了更好的性能会提供硬件加速利用这个方案，我们其实改变类似于一些图标的颜色，比如黑色的图标变成蓝色的图标。
+                        </code>
+                    </p>
+                    <code>
+                        img {
+                        filter: drop-shadow(105px 0 0 #ccc);
+                        }
+                    </code>
+                    <!-- PNG格式小图标的CSS任意颜色赋色技术 -->
+                    <!-- https://www.zhangxinxu.com/wordpress/2016/06/png-icon-change-color-by-css/ -->
+                    <p>
+                        <img src="img/Original" alt="阴影效果" style="filter: drop-shadow(105px 0 0 #ccc);">
+                    </p>
+                </li>
+                <li>
+                    <h3>hue-rotate(deg) 色相旋转</h3>
+                    <!-- <p></p> -->
+                    <code>
+                        img {
+                        filter:hue-rotate(70deg);
+                        }
+                    </code>
+                    <p>
+                        <img src="img/Original" alt="" style="filter:hue-rotate(70deg);">
+                    </p>
+                </li>
+                <li>
+                    <h3>invert(%) 反转</h3>
+                    <p>这个函数的作用是反转输入图像，有点像曝光的效果</p>
+                    <code>
+                        img {
+                        filter:invert(100%)
+                        }
+                    </code>
+                    <p>
+                        <img src="img/Original" alt="" style="filter:invert(100%)">
+                    </p>
+                </li>
+                <li>
+                    <h3>grayscale(%) 将图像转换为灰度图像</h3>
+                    <p>这个效果可以将图片做旧，有一种时代沧桑感。喜欢古风的人一定会喜欢上这个效果的。除了古风还有一种用法是有的时候需要将全站变成灰色，如大屠杀纪念日的时候。</p>
+                    <code>
+                        img {
+                        filter:grayscale(80%);
+                        }
+                    </code>
+                    <br>
+                    <code>
+                        img {
+                        filter: grayscale(100%);
+                        -webkit-filter: grayscale(100%);
+                        -moz-filter: grayscale(100%);
+                        -ms-filter: grayscale(100%);
+                        -o-filter: grayscale(100%);
+                        }
+                    </code>
+                    <p>
+                        <img src="img/Original" alt="" style="filter:grayscale(80%);">
+                        <img src="img/Original" alt="" style="filter: grayscale(100%);
+                        -webkit-filter: grayscale(100%);
+                        -moz-filter: grayscale(100%);
+                        -ms-filter: grayscale(100%);
+                        -o-filter: grayscale(100%);">
+                    </p>
+                </li>
+                <li>
+                    <h3>sepia(%) 将图像转换为深褐色</h3>
+                    <!-- <p></p> -->
+                    <code>
+                        img {
+                        filter:sepia(50%)
+                        }
+                    </code>
+                    <p>
+                        <img src="img/Original" alt="" style="filter:sepia(50%)">
+                    </p>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h2>终极变色解决方案！ filter:url()</h2>
+            <p>CSS:filter可以导入一个svg滤镜，作为他自己的滤镜。</p>
+            <p>
+                我们先科普一下PS的工作原理，我们都知道网页是有三原色的R(红) G(绿)
+                B(蓝)，常见的RGBA还包括一个opicity值，而opcity值是根据alpha通道计算出来的。也就是说，我们见到的网页的每一个像素点都是由红蓝绿再加alpha四个通道组成，每一个通道我们称之为色板，PS中的8位板的意思就是2的八次方256，意思就是每一个通道的取值范围都是(0-255)
+                <a href="https://www.oxxostudio.tw/articles/201406/svg-11-filter-feColorMatrix.html">SVG研究之路(11)-filter:feColorMatrix</a>
+            </p>
+            <p> 如果我们可以改变每个通道的值是不是就能完美的得到我们想要的任意颜色了呢，原理上，我们可以像ps那样利用svg滤镜得到任何我们想要的图像，不仅仅是变色。我们甚至可以凭空生成一幅图像。
+            </p>
+            <ul>
+                <li>
+                    <h3>svg feColorMatrix大法好</h3>
+                    <pre>
+<svg height="0" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <filter id="change">
+                <feColorMatrix type="matrix" values="
+                0 0 0 0 0.55
+                0 0 0 0 0.23 
+                0 0 0 0 0 
+                0 0 0 0 1" />
+        </filter>
+    </defs>
+</svg>  
+                    </pre>
+                    <code>
+                        img {
+                        filter:url(#change);
+                        }
+                    </code>
+                    <p>
+                        <svg height="0" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <filter id="change">
+                                    <feColorMatrix type="matrix" values="
+                                        0 0 0 0 0.55
+                                        0 0 0 0 0.23 
+                                        0 0 0 0 0 
+                                        0 0 0 0 1" />
+                                </filter>
+                            </defs>
+                        </svg>
+
+                        <img src="img/Original" alt="" style="filter:url(#change);max-width: 100px;">
+                    </p>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h2>注意：</h2>
+            <ul>
+                <li>css：filter与ie上的filter并不是相同的概念</li>
+                <li>css:filter在不同的浏览器上兼容性不一样，您在使用的时候需要注意浏览器的兼容性 </li>
+                <li>
+                    <img src="img/FilterCompatibility" alt="">
+                </li>
+            </ul>
+        </li>
+    </ul>
+</body>
+
+</html>
