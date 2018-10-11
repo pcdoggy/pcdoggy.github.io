@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS-Outline Daily Exercise - 转</title>
+    <!-- https://www.cnblogs.com/fsjohnhuang/p/9741345.html ^_^肥仔John -->
+    <style type="text/css">
+        label.radio {
+            /* 保证布局特性保持一致 */
+            margin: 3px 3px 0px 5px;
+            display: inline-block;
+            box-sizing: border-box;
+
+            width: 12px;
+            height: 12px;
+        }
+
+        .radio__appearance {
+            display: block;
+            /* 设置为block则不受vertical-align影响，从而不会意外影响到.radio的linebox高度 */
+            position: relative;
+            box-shadow: 0 0 0 1px tomato;
+            /* box-shadow不像border那样会影响盒子的框高 */
+            border-radius: 50%;
+            height: 90%;
+            width: 90%;
+            text-align: center;
+        }
+
+        label.radio [type=radio]+.radio__appearance::before {
+            content: "";
+            display: block;
+            border-radius: 50%;
+            width: 85%;
+            height: 85%;
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            transition: background .3s;
+        }
+
+        label.radio [type=radio]:checked+.radio__appearance::before {
+            background: tomato;
+        }
+
+        label.radio [type=radio][disabled]+.radio__appearance {
+            opacity: .5;
+        }
+
+        label.radio:focus {
+            outline-offset: 0px;
+            outline: #999 auto 5px;
+        }
+
+        /* 通过鼠标单击获得焦点时，outline效果不生效 */
+        label.radio.clicked {
+            outline: none 0;
+        }
+
+        /* 自定义单选框的行为主要是基于原生单选框的，因此先将原生单选框隐藏 */
+        label.radio input {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>前言</h1>
+    <p>是否曾经被业务提出"能改改这个单选框的颜色吧！让它和主题颜色搭配一下吧！"，然后苦于原生不支持换颜色，最后被迫自己手撸一个凑合使用。若抛开input[type=radio]重新开发一个，发现要模拟选中、未选中、不可用等状态很繁琐，而涉及单选框组就更烦人了，其实我们可以通过label、::before、:checked和tabindex，然后外加少量JavaScript脚本就能很好地模拟出一个样式更丰富的“原生”单选框。下面我们一起来尝试吧！</p>
+    <h1>单选框</h1>
+    <p>由于我们的目标是改变单选框颜色，其他外观特征和行为与原来的单选框一致，那么我们就必须先了解单选框原来的外观特征和行为主要有哪些。</p>
+    <ul>
+        <li>
+            <p>1.外观特征</p>
+            <ul>
+                <li>
+                    <p>1.1.常态样式</p>
+                    <p>
+                        <code>
+                            margin: 3px 3px 0px 5px;
+                            border: none 0;
+                            padding: 0;
+                            box-sizing: border-box;
+                            display: inline-block;
+                            line-height: normal;
+                            position: static;
+                        </code>
+                    </p>
+                    <p>注意：外观上我们必须要保证布局特性和原生的一致，否则采用自定义单选框替换后很大机会会影响整体的布局，最后导致被迫调整其他元素的布局特性来达到整体的协调，从而扩大了修改范围。</p>
+                </li>
+                <li>
+                    <p>1.2.获得焦点的样式</p>
+                    <p>
+                        <code>
+                            outline-offset: 0px;
+                            outline: -webkit-focu-ring-color auto 5px;
+                        </code>
+                    </p>
+                    <p>注意：这里的获取焦点的样式仅通过键盘Tab键才生效，若通过鼠标点击虽然单选框已获得焦点，但上述样式并不会生效。</p>
+                </li>
+                <li>
+                    <p>1.3.设置为disabled的样式</p>
+                    <p>
+                        <code>
+                            color: rgb(84, 84, 84);
+                        </code>
+                    </p>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <p>2.行为特征</p>
+            <p>单选框的行为特征，明显就是选中与否，及选中状态的改变事件，因此我们必须保持对外提供change事件。</p>
+            <p>另外值得注意的是，当通过键盘的Tab键让单选框获得焦点后，再按下Space键则会选中该单选框。</p>
+        </li>
+    </ul>
+    <h1>撸代码</h1>
+    <p><img src="./img/0.png" alt="效果" style="width:142px;"></p>
+    <p>上图中左侧就是原生单选框，右侧为我们自定义的单选框。从上到下依次为未选中、选中、获得焦点和disabled状态的样式。</p>
+    <h3>CSS部分</h3>
+    <p>
+        <textarea style="width:100%;height:29rem;" readonly>
+                  label.radio {
+                    /* 保证布局特性保持一致 */
+                    margin: 3px 3px 0px 5px;
+                    display: inline-block;
+                    box-sizing: border-box;
+                  
+                    width: 12px;
+                    height: 12px;
+                  }
+                  
+                  .radio__appearance{
+                    display: block; /* 设置为block则不受vertical-align影响，从而不会意外影响到.radio的linebox高度 */
+                    position: relative;
+                    box-shadow: 0 0 0 1px tomato; /* box-shadow不像border那样会影响盒子的框高 */
+                    border-radius: 50%;
+                    height: 90%;
+                    width: 90%;
+                    text-align: center;
+                  }
+                  label.radio [type=radio] + .radio__appearance::before{
+                    content: "";
+                    display: block;
+                    border-radius: 50%;
+                    width: 85%;
+                    height: 85%;
+                  
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                  
+                    transition: background .3s;
+                  }
+                  label.radio [type=radio]:checked + .radio__appearance::before{
+                    background: tomato;
+                  }
+                  label.radio [type=radio][disabled] + .radio__appearance{
+                    opacity: .5;
+                  }
+                  label.radio:focus{
+                    outline-offset: 0px;
+                    outline: #999 auto 5px;
+                  }
+                  /* 通过鼠标单击获得焦点时，outline效果不生效 */
+                  label.radio.clicked{
+                    outline: none 0;
+                  }
+                  /* 自定义单选框的行为主要是基于原生单选框的，因此先将原生单选框隐藏 */
+                  label.radio input {
+                    display: none;
+                  }
+        </textarea>
+    </p>
+    <h3>HTML部分</h3>
+    <p>
+        <textarea style="width:100%;height:29rem;" readonly>
+            <!-- 未选中状态 -->
+            <span class="radio">
+                <span class="radio__container-box">
+                    <input type="radio" name="a">
+                    <i class="radio__appearance"></i>
+                </span>
+            </span>
+
+            <br>
+
+            <!-- 选中状态 -->
+            <span class="radio">
+                <span class="radio__container-box">
+                    <input type="radio" name="a" checked>
+                    <i class="radio__appearance"></i>
+                </span>
+            </span>
+
+            <br>
+
+            <!-- disabled状态 -->
+            <span class="radio">
+                <span class="radio__container-box">
+                    <input type="radio" name="a" disabled>
+                    <i class="radio__appearance"></i>
+                </span>
+            </span>
+
+        </textarea>
+    </p>
+
+    <h3>JavaScript部分</h3>
+    <p>
+        <textarea style="width:100%;height:15rem;" readonly>
+                var radios = document.querySelectorAll(".radio")
+                radios.forEach(radio => {
+                  // 模拟鼠标点击后:focus样式无效
+                  radio.addEventListener("mousedown", e => {
+                    var tar = e.currentTarget
+                    tar.classList.add("clicked")
+                    var fp = setInterval(function(){
+                      if (!tar.contains(document.activeElement){
+                        tar.classList.remove("clicked")
+                        clearInterval(fp)
+                      }
+                    }, 400)
+                  })
+                })
+        </textarea>
+    </p>
+
+    <h1>效果展示</h3>
+        <p>
+            <!-- 未选中状态 -->
+            <span class="radio">
+                <span class="radio__container-box">
+                    <input type="radio" name="a">
+                    <i class="radio__appearance"></i>
+                </span>
+            </span>
+
+            <br>
+
+            <!-- 选中状态 -->
+            <span class="radio">
+                <span class="radio__container-box">
+                    <input type="radio" name="a" checked>
+                    <i class="radio__appearance"></i>
+                </span>
+            </span>
+
+            <br>
+
+            <!-- disabled状态 -->
+            <span class="radio">
+                <span class="radio__container-box">
+                    <input type="radio" name="a" disabled>
+                    <i class="radio__appearance"></i>
+                </span>
+            </span>
+        </p>
+
+        <script type="text/javascript">
+            var radios = document.querySelectorAll(".radio")
+            radios.forEach(radio => {
+                        // 模拟鼠标点击后:focus样式无效
+                        radio.addEventListener("mousedown", e => {
+                                var tar = e.currentTarget
+                                tar.classList.add("clicked")
+                                var fp = setInterval(function () {
+                                        if (!tar.contains(document.activeElement) {
+                                                tar.classList.remove("clicked")
+                                                clearInterval(fp)
+                                            }
+                                        }, 400)
+                                })
+                        })
+        </script>
+</body>
+
+</html>
